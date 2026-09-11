@@ -1,0 +1,16 @@
+{
+  "duplicate_logical_keys": true,
+  "null_state": true,
+  "invalid_year": true,
+  "invalid_quarter": true,
+  "negative_transaction_count": true,
+  "negative_transaction_amount": true,
+  "negative_registered_users": true,
+  "negative_registered_merchants": true,
+  "latest_core_values_complete": true,
+  "null_district": true,
+  "district_state_count_reconciliation": true,
+  "district_state_user_reconciliation": true,
+  "district_state_merchant_reconciliation": true,
+  "district_state_value_reconciliation_over_one_rupee": true
+}

@@ -34,8 +34,8 @@ DIVIDE([Transaction Volume], [Registered Merchant Base])
 Value per Merchant =
 DIVIDE([Transaction Value INR], [Registered Merchant Base])
 
-Merchants per 1000 Users =
-1000 * DIVIDE([Registered Merchant Base], [Registered User Base])
+Merchants per 100K Users =
+100000 * DIVIDE([Registered Merchant Base], [Registered User Base])
 
 Transaction QoQ =
 VAR p = MAX(Periods[Period ID]) VAR previous = CALCULATE([Transaction Volume], REMOVEFILTERS(Periods), Periods[Period ID] = p - 1) RETURN IF(NOT ISBLANK(previous), DIVIDE([Transaction Volume], previous) - 1)
@@ -66,6 +66,21 @@ IF(HASONEVALUE(Districts[District Key]), MAX(Opportunities[Users per Merchant]))
 
 Eligible Districts =
 COUNTROWS(Opportunities)
+
+Expand Districts =
+CALCULATE(COUNTROWS(Opportunities), Opportunities[Segment] = "EXPAND")
+
+Defend Districts =
+CALCULATE(COUNTROWS(Opportunities), Opportunities[Segment] = "DEFEND")
+
+Develop Districts =
+CALCULATE(COUNTROWS(Opportunities), Opportunities[Segment] = "DEVELOP")
+
+Monitor Districts =
+CALCULATE(COUNTROWS(Opportunities), Opportunities[Segment] = "MONITOR")
+
+State Opportunity Score =
+MAX('State Opportunities'[State Score])
 
 Shortlist Score =
 MAX(Recommendations[Score])

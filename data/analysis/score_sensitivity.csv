@@ -1,4 +1,0 @@
-scenario,top10_overlap_with_base,districts
-opportunity_score,10,west godavari; sangareddy; dr br ambedkar konaseema; east godavari; sri potti sriramulu nellore; alluri sitharama raju; tirupati; eluru; mandya; hassan
-equal_weight_score,9,west godavari; sangareddy; sri potti sriramulu nellore; east godavari; dr br ambedkar konaseema; tirupati; eluru; dakshina kannada; hassan; mandya
-no_intensity_score,6,dahod; west godavari; jamnagar; sangareddy; bharuch; dr br ambedkar konaseema; east godavari; alluri sitharama raju; sri potti sriramulu nellore; dakshina kannada

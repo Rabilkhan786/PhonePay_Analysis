@@ -1,4 +1,4 @@
-state,period_id,transactions_difference,value_inr_difference,registered_users_difference,registered_merchants_difference
+state,period_id,transaction_count_difference,transaction_amount_difference,registered_users_difference,registered_merchants_difference
 andaman & nicobar islands,8072,0,0.0,0,
 andaman & nicobar islands,8073,0,0.0,0,
 andaman & nicobar islands,8074,0,2.9802322387695312e-08,0,

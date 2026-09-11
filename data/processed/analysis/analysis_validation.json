@@ -1,0 +1,9 @@
+{
+  "latest_period": "2026-Q2",
+  "district_metric_rows": 26616,
+  "eligible_districts": 680,
+  "score_in_0_100": true,
+  "top10_positive_yoy_all_last_4_quarters": true,
+  "equal_weight_top10_overlap": 9,
+  "no_intensity_top10_overlap": 6
+}
