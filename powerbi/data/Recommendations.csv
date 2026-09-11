@@ -1,26 +1,11 @@
 District Key,Priority,Score,YoY Growth,Users per Merchant,Merchants,Segment,Positive YoY Quarters,Action,Alternative Rank
-andhra pradesh|west godavari,1,86.67893961708396,0.30533,24.61701,48583,EXPAND,4.0,Validate merchant coverage and active acceptance in a field pilot,2
-telangana|sangareddy,2,86.2739322533137,0.32341,18.01938,102640,EXPAND,4.0,Validate merchant coverage and active acceptance in a field pilot,4
-andhra pradesh|dr br ambedkar konaseema,3,84.99263622974962,0.32959,20.3837,45653,EXPAND,4.0,Validate merchant coverage and active acceptance in a field pilot,6
-andhra pradesh|east godavari,4,84.4918998527246,0.32186,18.27581,74989,EXPAND,4.0,Validate merchant coverage and active acceptance in a field pilot,7
-andhra pradesh|sri potti sriramulu nellore,5,84.11634756995582,0.30487,18.48564,93583,EXPAND,4.0,Validate merchant coverage and active acceptance in a field pilot,9
-andhra pradesh|alluri sitharama raju,6,83.64506627393226,0.37871,36.60389,11247,EXPAND,4.0,Validate merchant coverage and active acceptance in a field pilot,8
-andhra pradesh|tirupati,7,82.30486008836525,0.28171,18.66422,118910,EXPAND,4.0,Validate merchant coverage and active acceptance in a field pilot,16
-andhra pradesh|eluru,8,81.35493372606774,0.29156,18.91242,67639,EXPAND,4.0,Validate merchant coverage and active acceptance in a field pilot,21
-karnataka|mandya,9,81.08247422680412,0.28215,23.76374,41069,EXPAND,4.0,Validate merchant coverage and active acceptance in a field pilot,20
-karnataka|hassan,10,80.26509572901327,0.26413,26.22027,42357,EXPAND,4.0,Validate merchant coverage and active acceptance in a field pilot,23
-karnataka|dakshina kannada,11,80.23564064801178,0.268,28.88138,54458,EXPAND,4.0,Validate merchant coverage and active acceptance in a field pilot,10
-maharashtra|nanded,12,79.9779086892489,0.30068,17.54509,100568,EXPAND,4.0,Validate merchant coverage and active acceptance in a field pilot,13
-andhra pradesh|annamayya,13,79.52871870397644,0.2756,21.65235,50051,EXPAND,4.0,Validate merchant coverage and active acceptance in a field pilot,25
-gujarat|bharuch,14,79.1458026509573,0.29797,23.02817,55060,EXPAND,4.0,Validate merchant coverage and active acceptance in a field pilot,5
-gujarat|dahod,15,78.7039764359352,0.357,32.93055,18617,EXPAND,4.0,Validate merchant coverage and active acceptance in a field pilot,1
-andhra pradesh|guntur,16,77.95287187039764,0.31367,15.16541,132072,DEFEND,4.0,Validate merchant coverage and active acceptance in a field pilot,30
-gujarat|kachchh,17,77.88659793814432,0.27231,24.92914,60486,EXPAND,4.0,Validate merchant coverage and active acceptance in a field pilot,11
-bihar|jehanabad,18,77.23122238586157,0.43401,23.295,17868,EXPAND,4.0,Validate merchant coverage and active acceptance in a field pilot,15
-andhra pradesh|srikakulam,19,77.19440353460972,0.27145,19.3356,59392,EXPAND,4.0,Validate merchant coverage and active acceptance in a field pilot,39
-karnataka|mysuru,20,77.01767304860087,0.26568,18.13647,133130,EXPAND,4.0,Validate merchant coverage and active acceptance in a field pilot,31
-telangana|mahabubnagar,21,76.90721649484537,0.31724,18.22259,35675,EXPAND,4.0,Validate merchant coverage and active acceptance in a field pilot,45
-andhra pradesh|kakinada,22,76.75994108983801,0.29229,16.13305,94093,EXPAND,4.0,Validate merchant coverage and active acceptance in a field pilot,46
-maharashtra|buldhana,23,76.21502209131074,0.26896,19.44038,69454,EXPAND,4.0,Validate merchant coverage and active acceptance in a field pilot,32
-maharashtra|satara,24,76.14138438880708,0.27526,19.36494,89747,EXPAND,4.0,Validate merchant coverage and active acceptance in a field pilot,22
-telangana|narayanpet,25,76.0898379970545,0.36121,20.58752,12071,EXPAND,4.0,Validate merchant coverage and active acceptance in a field pilot,47
+andhra pradesh|west godavari,1,86.6789396171,0.3053306759084742,24.61700594858284,48583,EXPAND,4.0,Priority field validation,2
+telangana|sangareddy,2,86.2739322533,0.3234052018030091,18.019378409976618,102640,EXPAND,4.0,Priority field validation,4
+andhra pradesh|dr br ambedkar konaseema,3,84.9926362297,0.3295914408846017,20.383698771165093,45653,EXPAND,4.0,Priority field validation,6
+andhra pradesh|east godavari,4,84.4918998527,0.3218624340276936,18.27581378602195,74989,EXPAND,4.0,Priority field validation,7
+andhra pradesh|sri potti sriramulu nellore,5,84.11634757,0.3048670644189575,18.48564376008463,93583,EXPAND,4.0,Priority field validation,9
+andhra pradesh|alluri sitharama raju,6,83.6450662739,0.3787052917103264,36.60389437183249,11247,EXPAND,4.0,Priority field validation,8
+andhra pradesh|tirupati,7,82.3048600884,0.2817131382799915,18.6642166344294,118910,EXPAND,4.0,Investigate; sensitive to intensity weighting,15
+andhra pradesh|eluru,8,81.3549337261,0.2915598160731087,18.912417392332827,67639,EXPAND,4.0,Investigate; sensitive to intensity weighting,20
+karnataka|mandya,9,81.0824742268,0.2821500060787401,23.76373907326694,41069,EXPAND,4.0,Investigate; sensitive to intensity weighting,19
+karnataka|hassan,10,80.265095729,0.2641339570765659,26.22027055740492,42357,EXPAND,4.0,Investigate; sensitive to intensity weighting,22

@@ -3,6 +3,7 @@
 import json
 import logging
 
+import numpy as np
 import pandas as pd
 
 from phonepe_analytics.config import LATEST_QUARTER, LATEST_YEAR, PROCESSED_DIR
@@ -16,6 +17,17 @@ def validate_quarter_table(frame: pd.DataFrame, level: str) -> list[dict]:
     if level == "district":
         key.insert(1, "district")
     checks = [
+        {"check": "nonempty_table", "table": level, "failures": int(frame.empty)},
+        {
+            "check": "invalid_period_id",
+            "table": level,
+            "failures": int(
+                (
+                    frame["period_id"].isna()
+                    | frame["period_id"].ne(frame["year"] * 4 + frame["quarter"] - 1)
+                ).sum()
+            ),
+        },
         {
             "check": "duplicate_logical_keys",
             "table": level,
@@ -55,6 +67,14 @@ def validate_quarter_table(frame: pd.DataFrame, level: str) -> list[dict]:
             }
         )
     latest = frame.loc[frame["year"].eq(LATEST_YEAR) & frame["quarter"].eq(LATEST_QUARTER)]
+    checks.append({"check": "latest_period_present", "table": level, "failures": int(latest.empty)})
+    checks.append(
+        {
+            "check": "beyond_analysis_end",
+            "table": level,
+            "failures": int(frame["period_id"].gt(LATEST_YEAR * 4 + LATEST_QUARTER - 1).sum()),
+        }
+    )
     core = ["transaction_count", "transaction_amount", "registered_users", "registered_merchants"]
     checks.append(
         {
@@ -135,11 +155,32 @@ def main() -> None:
     checks, reconciliation = validate_processed_data(state, district)
     checks.to_csv(PROCESSED_DIR / "quality_checks.csv", index=False)
     reconciliation.to_csv(PROCESSED_DIR / "geographic_reconciliation.csv", index=False)
-    summary = {row.check: row.failures == 0 for row in checks.itertuples()}
+    categories = pd.read_parquet(PROCESSED_DIR / "state_transaction_categories.parquet")
+    validate_categories(state, categories).to_csv(
+        PROCESSED_DIR / "category_reconciliation.csv", index=False
+    )
+    summary = {f"{row.table}.{row.check}": row.failures == 0 for row in checks.itertuples()}
     (PROCESSED_DIR / "validation_summary.json").write_text(
         json.dumps(summary, indent=2), encoding="utf-8"
     )
     LOGGER.info("All %s data-quality checks passed", len(checks))
+
+
+def validate_categories(state: pd.DataFrame, categories: pd.DataFrame) -> pd.DataFrame:
+    """Require unique, nonnegative category counts and reconcile to state totals."""
+    keys = ["state", "period_id"]
+    if categories.empty or categories.duplicated([*keys, "category"]).any():
+        raise ValueError("Empty or duplicate category records")
+    if categories[[*keys, "category", "transaction_count"]].isna().any().any():
+        raise ValueError("Missing category identifiers or counts")
+    if categories["transaction_count"].lt(0).any():
+        raise ValueError("Negative category counts")
+    totals = categories.groupby(keys)["transaction_count"].sum().rename("category_count")
+    compared = state.set_index(keys)[["transaction_count"]].join(totals, how="outer")
+    compared["difference"] = compared["category_count"] - compared["transaction_count"]
+    if not np.allclose(compared["difference"], 0, rtol=0, atol=0, equal_nan=False):
+        raise ValueError("Category totals do not reconcile to state transactions")
+    return compared.reset_index()
 
 
 if __name__ == "__main__":

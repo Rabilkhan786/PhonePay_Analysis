@@ -4,9 +4,9 @@ import argparse
 import hashlib
 import json
 import logging
-from datetime import datetime, timezone
-from pathlib import Path
 import subprocess
+from datetime import UTC, datetime
+from pathlib import Path
 
 import pandas as pd
 
@@ -135,7 +135,7 @@ def extract_source(raw_root: Path) -> tuple[pd.DataFrame, pd.DataFrame, dict]:
     provenance = {
         "repository": "https://github.com/PhonePe/pulse",
         "commit": commit,
-        "retrieved_utc": datetime.now(timezone.utc).isoformat(),
+        "retrieved_utc": datetime.now(UTC).isoformat(),
         "analysis_end": f"{LATEST_YEAR}-Q{LATEST_QUARTER}",
         "hover_files": manifest,
     }

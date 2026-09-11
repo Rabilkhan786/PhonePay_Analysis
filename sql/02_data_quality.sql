@@ -11,69 +11,65 @@ FROM state_transactions
 UNION ALL
 
 SELECT
-    'district_transactions' AS table_name,
-    COUNT(*) AS row_count,
-    COUNT(DISTINCT CONCAT_WS('|', state, district, year, quarter)) AS distinct_keys,
-    SUM(
-        state IS NULL
-        OR state = ''
-        OR district IS NULL
-        OR district = ''
-    ) AS null_identifiers,
-    SUM(quarter NOT BETWEEN 1 AND 4) AS invalid_quarters,
-    SUM(transaction_count < 0 OR transaction_amount < 0) AS negative_values
+    'district_transactions',
+    COUNT(*),
+    COUNT(DISTINCT CONCAT_WS('|', state, district, year, quarter)),
+    SUM(state IS NULL OR state = '' OR district IS NULL OR district = ''),
+    SUM(quarter NOT BETWEEN 1 AND 4),
+    SUM(transaction_count < 0 OR transaction_amount < 0)
 FROM district_transactions
 
 UNION ALL
 
 SELECT
-    'state_users' AS table_name,
-    COUNT(*) AS row_count,
-    COUNT(DISTINCT CONCAT_WS('|', state, year, quarter)) AS distinct_keys,
-    SUM(state IS NULL OR state = '') AS null_identifiers,
-    SUM(quarter NOT BETWEEN 1 AND 4) AS invalid_quarters,
-    SUM(registered_users < 0) AS negative_values
+    'state_users',
+    COUNT(*),
+    COUNT(DISTINCT CONCAT_WS('|', state, year, quarter)),
+    SUM(state IS NULL OR state = ''),
+    SUM(quarter NOT BETWEEN 1 AND 4),
+    SUM(registered_users < 0)
 FROM state_users
 
 UNION ALL
 
 SELECT
-    'district_users' AS table_name,
-    COUNT(*) AS row_count,
-    COUNT(DISTINCT CONCAT_WS('|', state, district, year, quarter)) AS distinct_keys,
-    SUM(
-        state IS NULL
-        OR state = ''
-        OR district IS NULL
-        OR district = ''
-    ) AS null_identifiers,
-    SUM(quarter NOT BETWEEN 1 AND 4) AS invalid_quarters,
-    SUM(registered_users < 0) AS negative_values
+    'district_users',
+    COUNT(*),
+    COUNT(DISTINCT CONCAT_WS('|', state, district, year, quarter)),
+    SUM(state IS NULL OR state = '' OR district IS NULL OR district = ''),
+    SUM(quarter NOT BETWEEN 1 AND 4),
+    SUM(registered_users < 0)
 FROM district_users
 
 UNION ALL
 
 SELECT
-    'state_merchants' AS table_name,
-    COUNT(*) AS row_count,
-    COUNT(DISTINCT CONCAT_WS('|', state, year, quarter)) AS distinct_keys,
-    SUM(state IS NULL OR state = '') AS null_identifiers,
-    SUM(quarter NOT BETWEEN 1 AND 4) AS invalid_quarters,
-    SUM(registered_merchants < 0) AS negative_values
+    'state_merchants',
+    COUNT(*),
+    COUNT(DISTINCT CONCAT_WS('|', state, year, quarter)),
+    SUM(state IS NULL OR state = ''),
+    SUM(quarter NOT BETWEEN 1 AND 4),
+    SUM(registered_merchants < 0)
 FROM state_merchants
 
 UNION ALL
 
 SELECT
-    'district_merchants' AS table_name,
-    COUNT(*) AS row_count,
-    COUNT(DISTINCT CONCAT_WS('|', state, district, year, quarter)) AS distinct_keys,
-    SUM(
-        state IS NULL
-        OR state = ''
-        OR district IS NULL
-        OR district = ''
-    ) AS null_identifiers,
-    SUM(quarter NOT BETWEEN 1 AND 4) AS invalid_quarters,
-    SUM(registered_merchants < 0) AS negative_values
-FROM district_merchants;
+    'district_merchants',
+    COUNT(*),
+    COUNT(DISTINCT CONCAT_WS('|', state, district, year, quarter)),
+    SUM(state IS NULL OR state = '' OR district IS NULL OR district = ''),
+    SUM(quarter NOT BETWEEN 1 AND 4),
+    SUM(registered_merchants < 0)
+FROM district_merchants
+
+UNION ALL
+
+SELECT
+    'state_transaction_categories',
+    COUNT(*),
+    COUNT(DISTINCT CONCAT_WS('|', state, year, quarter, category)),
+    SUM(state IS NULL OR state = '' OR category IS NULL OR category = ''),
+    SUM(quarter NOT BETWEEN 1 AND 4),
+    SUM(transaction_count < 0)
+FROM state_transaction_categories;

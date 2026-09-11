@@ -7,7 +7,8 @@ CREATE TABLE IF NOT EXISTS state_transactions (
     transaction_amount DECIMAL(24, 2) UNSIGNED NOT NULL,
     PRIMARY KEY (state, year, quarter),
     INDEX idx_state_transactions_period (period_id),
-    CHECK (quarter BETWEEN 1 AND 4)
+    CHECK (quarter BETWEEN 1 AND 4),
+    CHECK (period_id = year * 4 + quarter - 1)
 );
 
 CREATE TABLE IF NOT EXISTS district_transactions (
@@ -20,7 +21,8 @@ CREATE TABLE IF NOT EXISTS district_transactions (
     transaction_amount DECIMAL(24, 2) UNSIGNED NOT NULL,
     PRIMARY KEY (state, district, year, quarter),
     INDEX idx_district_transactions_period (period_id),
-    CHECK (quarter BETWEEN 1 AND 4)
+    CHECK (quarter BETWEEN 1 AND 4),
+    CHECK (period_id = year * 4 + quarter - 1)
 );
 
 CREATE TABLE IF NOT EXISTS state_users (
@@ -31,7 +33,8 @@ CREATE TABLE IF NOT EXISTS state_users (
     registered_users BIGINT UNSIGNED NOT NULL,
     PRIMARY KEY (state, year, quarter),
     INDEX idx_state_users_period (period_id),
-    CHECK (quarter BETWEEN 1 AND 4)
+    CHECK (quarter BETWEEN 1 AND 4),
+    CHECK (period_id = year * 4 + quarter - 1)
 );
 
 CREATE TABLE IF NOT EXISTS district_users (
@@ -43,7 +46,8 @@ CREATE TABLE IF NOT EXISTS district_users (
     registered_users BIGINT UNSIGNED NOT NULL,
     PRIMARY KEY (state, district, year, quarter),
     INDEX idx_district_users_period (period_id),
-    CHECK (quarter BETWEEN 1 AND 4)
+    CHECK (quarter BETWEEN 1 AND 4),
+    CHECK (period_id = year * 4 + quarter - 1)
 );
 
 CREATE TABLE IF NOT EXISTS state_merchants (
@@ -54,7 +58,8 @@ CREATE TABLE IF NOT EXISTS state_merchants (
     registered_merchants BIGINT UNSIGNED NULL,
     PRIMARY KEY (state, year, quarter),
     INDEX idx_state_merchants_period (period_id),
-    CHECK (quarter BETWEEN 1 AND 4)
+    CHECK (quarter BETWEEN 1 AND 4),
+    CHECK (period_id = year * 4 + quarter - 1)
 );
 
 CREATE TABLE IF NOT EXISTS district_merchants (
@@ -66,7 +71,8 @@ CREATE TABLE IF NOT EXISTS district_merchants (
     registered_merchants BIGINT UNSIGNED NULL,
     PRIMARY KEY (state, district, year, quarter),
     INDEX idx_district_merchants_period (period_id),
-    CHECK (quarter BETWEEN 1 AND 4)
+    CHECK (quarter BETWEEN 1 AND 4),
+    CHECK (period_id = year * 4 + quarter - 1)
 );
 
 CREATE TABLE IF NOT EXISTS state_transaction_categories (
@@ -78,6 +84,7 @@ CREATE TABLE IF NOT EXISTS state_transaction_categories (
     transaction_count BIGINT UNSIGNED NOT NULL,
     PRIMARY KEY (state, year, quarter, category),
     INDEX idx_state_categories_period (period_id),
-    CHECK (quarter BETWEEN 1 AND 4)
+    CHECK (quarter BETWEEN 1 AND 4),
+    CHECK (period_id = year * 4 + quarter - 1)
 );
 

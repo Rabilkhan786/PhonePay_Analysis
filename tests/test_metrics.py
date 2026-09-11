@@ -37,15 +37,17 @@ def test_growth_requires_consecutive_quarters() -> None:
         }
     )
     result = add_growth_metrics(frame, ["state", "district"])
-    assert result.loc[result["period_id"].eq(8101), "transaction_count_qoq"].iat[
-        0
-    ] == pytest.approx(0.1)
-    assert np.isnan(result.loc[result["period_id"].eq(8103), "transaction_count_qoq"].iat[0])
+    assert result.loc[result["period_id"].eq(8101), "transaction_qoq"].iat[0] == pytest.approx(0.1)
+    assert np.isnan(result.loc[result["period_id"].eq(8103), "transaction_qoq"].iat[0])
 
 
 def test_opportunity_score_stays_in_range_and_segments() -> None:
     frame = pd.DataFrame(
         {
+            "state": ["a"] * 4,
+            "district": ["a", "b", "c", "d"],
+            "period_id": [8105] * 4,
+            "transaction_qoq": [0.1] * 4,
             "transaction_count": [1_000_000, 2_000_000, 3_000_000, 4_000_000],
             "registered_users": [100_000, 200_000, 300_000, 400_000],
             "registered_merchants": [1_000, 2_000, 3_000, 4_000],
@@ -57,3 +59,15 @@ def test_opportunity_score_stays_in_range_and_segments() -> None:
     result = score_opportunities(frame)
     assert result["opportunity_score"].between(0, 100).all()
     assert set(result["business_segment"]).issubset({"EXPAND", "DEFEND", "DEVELOP", "MONITOR"})
+
+
+def test_opportunity_score_rejects_incomplete_weights() -> None:
+    frame = pd.DataFrame({"period_id": [8105]})
+    with pytest.raises(ValueError, match="four scoring factors"):
+        score_opportunities(frame, weights={"transaction_yoy": 1.0})
+
+
+def test_opportunity_score_rejects_mixed_quarters() -> None:
+    frame = pd.DataFrame({"period_id": [8104, 8105]})
+    with pytest.raises(ValueError, match="one quarter"):
+        score_opportunities(frame)
