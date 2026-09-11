@@ -1,9 +1,12 @@
-# Local tools, downloaded source, database files and credentials are not portfolio content.
+# Local tools, source checkout, credentials, caches, and logs are not portfolio content.
 work/
 .venv/
+.env
 __pycache__/
 *.pyc
-.env
-**/.pbi/
+.pytest_cache/
+.ruff_cache/
+.ipynb_checkpoints/
 *.log
+**/.pbi/
 data/processed/source_lineage.csv
