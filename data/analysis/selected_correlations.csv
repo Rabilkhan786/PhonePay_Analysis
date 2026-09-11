@@ -1,0 +1,5 @@
+metric_a,metric_b,spearman_rho,n
+registered_users,transactions,0.898097136124989,680
+users_per_merchant,transactions_per_merchant,0.48525398805691494,680
+registered_merchants,transactions,0.8543662607344511,680
+transaction_yoy,users_per_merchant,-0.20627490925522307,680

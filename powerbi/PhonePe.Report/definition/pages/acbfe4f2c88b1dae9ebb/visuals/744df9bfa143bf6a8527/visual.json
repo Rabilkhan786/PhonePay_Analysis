@@ -1,0 +1,226 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "744df9bfa143bf6a8527",
+  "position": {
+    "x": 740,
+    "y": 196,
+    "width": 676,
+    "height": 400,
+    "z": 34000,
+    "tabOrder": 34000
+  },
+  "visual": {
+    "visualType": "scatterChart",
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Opportunity matrix — eligible districts'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "13D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FFFFFF'"
+                    }
+                  }
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "padding": [
+        {
+          "properties": {
+            "top": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            },
+            "bottom": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            },
+            "left": {
+              "expr": {
+                "Literal": {
+                  "Value": "12D"
+                }
+              }
+            },
+            "right": {
+              "expr": {
+                "Literal": {
+                  "Value": "12D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Districts"
+                    }
+                  },
+                  "Property": "District Key"
+                }
+              },
+              "queryRef": "Districts.District Key",
+              "nativeQueryRef": "District Key"
+            }
+          ]
+        },
+        "X": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Opportunities"
+                    }
+                  },
+                  "Property": "Opportunity Users per Merchant"
+                }
+              },
+              "queryRef": "Opportunities.Opportunity Users per Merchant",
+              "nativeQueryRef": "Opportunity Users per Merchant"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Opportunities"
+                    }
+                  },
+                  "Property": "Opportunity YoY"
+                }
+              },
+              "queryRef": "Opportunities.Opportunity YoY",
+              "nativeQueryRef": "Opportunity YoY"
+            }
+          ]
+        },
+        "Tooltips": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Districts"
+                    }
+                  },
+                  "Property": "District"
+                }
+              },
+              "queryRef": "Districts.District",
+              "nativeQueryRef": "District"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Districts"
+                    }
+                  },
+                  "Property": "State"
+                }
+              },
+              "queryRef": "Districts.State",
+              "nativeQueryRef": "State"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Opportunities"
+                    }
+                  },
+                  "Property": "Opportunity Score"
+                }
+              },
+              "queryRef": "Opportunities.Opportunity Score",
+              "nativeQueryRef": "Opportunity Score"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,31 @@
+check,table,count,column
+duplicate keys,state_transaction,0,
+duplicate keys,state_user,0,
+duplicate keys,state_merchant,0,
+missing,state,0,transactions
+negative,state,0,transactions
+zero,state,0,transactions
+missing,state,0,value_inr
+negative,state,0,value_inr
+zero,state,0,value_inr
+missing,state,0,registered_users
+negative,state,0,registered_users
+zero,state,0,registered_users
+missing,state,46,registered_merchants
+negative,state,0,registered_merchants
+zero,state,0,registered_merchants
+duplicate keys,district_transaction,0,
+duplicate keys,district_user,0,
+duplicate keys,district_merchant,0,
+missing,district,6,transactions
+negative,district,0,transactions
+zero,district,0,transactions
+missing,district,6,value_inr
+negative,district,0,value_inr
+zero,district,0,value_inr
+missing,district,0,registered_users
+negative,district,0,registered_users
+zero,district,0,registered_users
+missing,district,1885,registered_merchants
+negative,district,0,registered_merchants
+zero,district,0,registered_merchants

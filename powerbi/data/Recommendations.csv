@@ -1,0 +1,11 @@
+District Key,Priority,Score,YoY Growth,Users per Merchant,Merchants,Action,Alternative Rank
+andhra pradesh|west godavari,1,86.67893961708396,0.3053306759084742,24.61700594858284,48583,Priority field validation,2
+telangana|sangareddy,2,86.2739322533137,0.3234052018030091,18.019378409976618,102640,Priority field validation,4
+andhra pradesh|dr br ambedkar konaseema,3,84.99263622974962,0.3295914408846017,20.383698771165093,45653,Priority field validation,6
+andhra pradesh|east godavari,4,84.4918998527246,0.3218624340276936,18.27581378602195,74989,Priority field validation,7
+andhra pradesh|sri potti sriramulu nellore,5,84.11634756995582,0.3048670644189575,18.48564376008463,93583,Priority field validation,9
+andhra pradesh|alluri sitharama raju,6,83.64506627393226,0.3787052917103264,36.60389437183249,11247,Priority field validation,8
+andhra pradesh|tirupati,7,82.30486008836525,0.2817131382799915,18.6642166344294,118910,Investigate; sensitive to intensity weighting,15
+andhra pradesh|eluru,8,81.35493372606774,0.2915598160731087,18.912417392332827,67639,Investigate; sensitive to intensity weighting,20
+karnataka|mandya,9,81.08247422680412,0.2821500060787401,23.76373907326694,41069,Investigate; sensitive to intensity weighting,19
+karnataka|hassan,10,80.26509572901327,0.2641339570765659,26.22027055740492,42357,Investigate; sensitive to intensity weighting,22

@@ -1,0 +1,6 @@
+state,district,period_id,year,quarter,transactions,value_inr,registered_users,registered_merchants
+andaman & nicobar islands,nicobar,8072,2018,1,696.0,1455284.391934002,484,
+andaman & nicobar islands,nicobar,8073,2018,2,1480.0,3781103.3068816382,688,
+andaman & nicobar islands,nicobar,8074,2018,3,1870.0,7560956.959735922,853,
+andaman & nicobar islands,nicobar,8075,2018,4,1860.0,8376410.358232589,1037,
+andaman & nicobar islands,nicobar,8076,2019,1,1985.0,8745229.692520771,1226,

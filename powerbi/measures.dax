@@ -1,0 +1,74 @@
+Transaction Volume =
+VAR p = MAX(Periods[Period ID]) RETURN CALCULATE(SUM(Payments[Transactions]), KEEPFILTERS(Periods[Period ID] = p))
+
+Transaction Value INR =
+VAR p = MAX(Periods[Period ID]) RETURN CALCULATE(SUM(Payments[Value INR]), KEEPFILTERS(Periods[Period ID] = p))
+
+Registered User Base =
+VAR p = MAX(Periods[Period ID]) RETURN CALCULATE(IF(COUNT(Payments[Registered Users]) = COUNTROWS(Payments), SUM(Payments[Registered Users]), BLANK()), KEEPFILTERS(Periods[Period ID] = p))
+
+Registered Merchant Base =
+VAR p = MAX(Periods[Period ID]) RETURN CALCULATE(IF(COUNT(Payments[Registered Merchants]) = COUNTROWS(Payments), SUM(Payments[Registered Merchants]), BLANK()), KEEPFILTERS(Periods[Period ID] = p))
+
+Volume Billion =
+DIVIDE([Transaction Volume], 1000000000)
+
+Value Trillion INR =
+DIVIDE([Transaction Value INR], 1000000000000)
+
+Users Million =
+DIVIDE([Registered User Base], 1000000)
+
+Merchants Million =
+DIVIDE([Registered Merchant Base], 1000000)
+
+Average Transaction Value =
+DIVIDE([Transaction Value INR], [Transaction Volume])
+
+Users per Merchant =
+DIVIDE([Registered User Base], [Registered Merchant Base])
+
+Transactions per Merchant =
+DIVIDE([Transaction Volume], [Registered Merchant Base])
+
+Value per Merchant =
+DIVIDE([Transaction Value INR], [Registered Merchant Base])
+
+Merchants per 1000 Users =
+1000 * DIVIDE([Registered Merchant Base], [Registered User Base])
+
+Transaction QoQ =
+VAR p = MAX(Periods[Period ID]) VAR previous = CALCULATE([Transaction Volume], REMOVEFILTERS(Periods), Periods[Period ID] = p - 1) RETURN IF(NOT ISBLANK(previous), DIVIDE([Transaction Volume], previous) - 1)
+
+Transaction YoY =
+VAR p = MAX(Periods[Period ID]) VAR previous = CALCULATE([Transaction Volume], REMOVEFILTERS(Periods), Periods[Period ID] = p - 4) RETURN IF(NOT ISBLANK(previous), DIVIDE([Transaction Volume], previous) - 1)
+
+Merchant QoQ =
+VAR p = MAX(Periods[Period ID]) VAR previous = CALCULATE([Registered Merchant Base], REMOVEFILTERS(Periods), Periods[Period ID] = p - 1) RETURN IF(NOT ISBLANK(previous), DIVIDE([Registered Merchant Base], previous) - 1)
+
+User QoQ =
+VAR p = MAX(Periods[Period ID]) VAR previous = CALCULATE([Registered User Base], REMOVEFILTERS(Periods), Periods[Period ID] = p - 1) RETURN IF(NOT ISBLANK(previous), DIVIDE([Registered User Base], previous) - 1)
+
+State Contribution =
+DIVIDE([Transaction Volume], CALCULATE([Transaction Volume], REMOVEFILTERS(States), REMOVEFILTERS(Districts)))
+
+Retail Volume Billion =
+VAR p = MAX(Periods[Period ID]) RETURN CALCULATE(DIVIDE(SUM('State Payments'[Retail Transactions]), 1000000000), KEEPFILTERS(Periods[Period ID] = p))
+
+Opportunity Score =
+IF(HASONEVALUE(Districts[District Key]), MAX(Opportunities[Score]))
+
+Opportunity YoY =
+IF(HASONEVALUE(Districts[District Key]), MAX(Opportunities[YoY Growth]))
+
+Opportunity Users per Merchant =
+IF(HASONEVALUE(Districts[District Key]), MAX(Opportunities[Users per Merchant]))
+
+Eligible Districts =
+COUNTROWS(Opportunities)
+
+Shortlist Score =
+MAX(Recommendations[Score])
+
+Shortlist YoY =
+MAX(Recommendations[YoY Growth])

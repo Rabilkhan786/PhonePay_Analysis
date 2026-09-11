@@ -1,0 +1,12 @@
+{
+  "unique_district_quarter": true,
+  "latest_core_fields_complete": true,
+  "row_count_preserved_by_sql_joins": true,
+  "transaction_qoq_matches_pandas": true,
+  "users_per_merchant_matches_pandas": true,
+  "yoy_matches_same_quarter_last_year": true,
+  "score_matches_independent_pandas": true,
+  "state_transaction_contribution_sums_to_one": true,
+  "district_contribution_sums_to_one_within_state": true,
+  "score_in_range_0_to_100": true
+}

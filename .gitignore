@@ -1,0 +1,9 @@
+# Local tools, downloaded source, database files and credentials are not portfolio content.
+work/
+.venv/
+__pycache__/
+*.pyc
+.env
+**/.pbi/
+*.log
+data/processed/source_lineage.csv

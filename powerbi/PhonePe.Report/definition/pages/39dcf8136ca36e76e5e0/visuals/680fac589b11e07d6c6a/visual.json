@@ -1,0 +1,245 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "680fac589b11e07d6c6a",
+  "position": {
+    "x": 790,
+    "y": 330,
+    "width": 626,
+    "height": 510,
+    "z": 12000,
+    "tabOrder": 12000
+  },
+  "visual": {
+    "visualType": "clusteredBarChart",
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'State transaction volume (billion) — scroll to compare'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "13D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FFFFFF'"
+                    }
+                  }
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "padding": [
+        {
+          "properties": {
+            "top": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            },
+            "bottom": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            },
+            "left": {
+              "expr": {
+                "Literal": {
+                  "Value": "12D"
+                }
+              }
+            },
+            "right": {
+              "expr": {
+                "Literal": {
+                  "Value": "12D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "States"
+                    }
+                  },
+                  "Property": "State"
+                }
+              },
+              "queryRef": "States.State",
+              "nativeQueryRef": "State"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Payments"
+                    }
+                  },
+                  "Property": "Volume Billion"
+                }
+              },
+              "queryRef": "Payments.Volume Billion",
+              "nativeQueryRef": "Volume Billion"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Payments"
+                  }
+                },
+                "Property": "Volume Billion"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": false
+      }
+    },
+    "objects": {
+      "dataPoint": [
+        {
+          "properties": {
+            "defaultColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#5F259F'"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "categoryAxis": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "11D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "valueAxis": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "11D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "labels": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "engine": "MySQL",
+  "version": "8.0.44",
+  "rows": {
+    "dim_period": 34,
+    "dim_state": 36,
+    "dim_district": 783,
+    "district_metrics": 26622,
+    "state_metrics": 1224,
+    "national_metrics": 34,
+    "district_opportunities": 680,
+    "investigation_shortlist": 624
+  },
+  "executed_utc": "2026-09-10T18:41:27.729422+00:00"
+}
