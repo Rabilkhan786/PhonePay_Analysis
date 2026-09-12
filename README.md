@@ -26,7 +26,7 @@ The recommendation is to begin field validation with the six candidates that rem
 4. [`04_opportunity_analysis.ipynb`](notebooks/04_opportunity_analysis.ipynb) — eligibility, segments, score distributions, factor profiles, recent persistence, weight sensitivity, threshold sensitivity, and the final research queue.
 5. [`06_business_questions.md`](sql/06_business_questions.md) — 15 numbered portfolio questions, each followed by clean MySQL, an explanation, and a decision-focused insight.
 6. [`business_recommendations.md`](reports/business_recommendations.md) — recommendation, evidence, field-pilot measures, and decision limits.
-7. [`PhonePe.pbip`](powerbi/PhonePe.pbip) or [`PhonePe_Merchant_Expansion_2026.pbix`](powerbi/PhonePe_Merchant_Expansion_2026.pbix) — the canonical Power BI project and portable single-file report.
+7. [`PhonePe.pbip`](powerbi/PhonePe.pbip) — the Power BI project with three distinct 1920×1080 report pages. The existing PBIX is the previous saved report; regenerate it from the PBIP after reviewing the redesigned pages in Power BI Desktop.
 
 ## Analytical design
 
@@ -90,7 +90,7 @@ uv run ruff check .
 uv run pytest
 ```
 
-For Power BI, open the PBIP project, edit the `DataFolder` parameter to the absolute `powerbi/data` path on your machine, then refresh. The repository stores screenshots only in `powerbi/charts`.
+For Power BI, open the PBIP project, edit the `DataFolder` parameter to the absolute `powerbi/data` path on your machine, then refresh. The pages use Azure Maps, synchronized quarter/state/district slicers, and real-model DAX. Opportunity scores and segments remain the fixed 2026 Q2 snapshot; payment KPIs use the latest selected quarter, while trend charts retain their recent history. The maps show state-level values; opportunity shading uses the average eligible district score within each state. Review map boundaries and colours, the radar image, card text, navigation, drill-through and filter behaviour in Desktop before saving a new PBIX. The repository stores screenshots only in `powerbi/charts`.
 
 ## Data source and limits
 

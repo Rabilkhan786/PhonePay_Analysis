@@ -1,7 +1,7 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.0.0/schema.json",
   "name": "acbfe4f2c88b1dae9ebb",
-  "displayName": "03  Merchant Expansion Opportunities",
+  "displayName": "Merchant Expansion Opportunities",
   "displayOption": "FitToPage",
   "height": 1080,
   "width": 1920,
@@ -14,7 +14,7 @@
               "color": {
                 "expr": {
                   "Literal": {
-                    "Value": "'#F7F5FA'"
+                    "Value": "'#F7F5FB'"
                   }
                 }
               }
@@ -30,5 +30,92 @@
         }
       }
     ]
-  }
+  },
+  "visualInteractions": [
+    {
+      "source": "a3000000000000000001",
+      "target": "7e3890475c8aa5e15388",
+      "type": "NoFilter"
+    },
+    {
+      "source": "a3000000000000000001",
+      "target": "9e59edbc8cc79e025328",
+      "type": "NoFilter"
+    },
+    {
+      "source": "a3000000000000000001",
+      "target": "e2c723d9b4c31cfdc5c7",
+      "type": "NoFilter"
+    },
+    {
+      "source": "a3000000000000000001",
+      "target": "41354db312d935a77c7d",
+      "type": "NoFilter"
+    },
+    {
+      "source": "a3000000000000000001",
+      "target": "1987c59a0f8fd76d0c88",
+      "type": "NoFilter"
+    },
+    {
+      "source": "a3000000000000000001",
+      "target": "cba96fa9f432667dd4be",
+      "type": "NoFilter"
+    },
+    {
+      "source": "a3000000000000000001",
+      "target": "a4000000000000000001",
+      "type": "NoFilter"
+    },
+    {
+      "source": "a3000000000000000001",
+      "target": "76d2eeb75c037ff59e46",
+      "type": "NoFilter"
+    },
+    {
+      "source": "a3000000000000000001",
+      "target": "555bb59a7e959104a3cb",
+      "type": "NoFilter"
+    },
+    {
+      "source": "a3000000000000000001",
+      "target": "594f7db295c6636acd8f",
+      "type": "NoFilter"
+    },
+    {
+      "source": "a3000000000000000001",
+      "target": "39dd7ae4dcb37a3f6046",
+      "type": "NoFilter"
+    },
+    {
+      "source": "a3000000000000000001",
+      "target": "75527438ddb21031a214",
+      "type": "NoFilter"
+    },
+    {
+      "source": "a3000000000000000001",
+      "target": "6b9683ae89d07ddba3cd",
+      "type": "NoFilter"
+    },
+    {
+      "source": "a3000000000000000001",
+      "target": "ca453d778d0da19ce3d9",
+      "type": "NoFilter"
+    },
+    {
+      "source": "a3000000000000000001",
+      "target": "78ffae07083dfd4b6673",
+      "type": "NoFilter"
+    },
+    {
+      "source": "a3000000000000000001",
+      "target": "704b30c3146201f81dc3",
+      "type": "NoFilter"
+    },
+    {
+      "source": "a3000000000000000001",
+      "target": "fcb49a748d97e69a24b3",
+      "type": "NoFilter"
+    }
+  ]
 }

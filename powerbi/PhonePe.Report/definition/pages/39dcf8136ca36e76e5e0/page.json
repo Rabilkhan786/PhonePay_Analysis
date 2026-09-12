@@ -1,10 +1,10 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.0.0/schema.json",
   "name": "39dcf8136ca36e76e5e0",
-  "displayName": "01  Digital Payments Overview",
+  "displayName": "Digital Payments Overview",
   "displayOption": "FitToPage",
-  "height": 900,
-  "width": 1440,
+  "height": 1080,
+  "width": 1920,
   "objects": {
     "background": [
       {
@@ -14,7 +14,7 @@
               "color": {
                 "expr": {
                   "Literal": {
-                    "Value": "'#F5F3F8'"
+                    "Value": "'#F7F5FB'"
                   }
                 }
               }
@@ -30,5 +30,42 @@
         }
       }
     ]
-  }
+  },
+  "visualInteractions": [
+    {
+      "source": "ed50820938949707ff04",
+      "target": "bd514d911b11bc79c7d0",
+      "type": "NoFilter"
+    },
+    {
+      "source": "ed50820938949707ff04",
+      "target": "b143a43452898cb4984f",
+      "type": "NoFilter"
+    },
+    {
+      "source": "ed50820938949707ff04",
+      "target": "c0f916e4096092530db8",
+      "type": "NoFilter"
+    },
+    {
+      "source": "ed50820938949707ff04",
+      "target": "cc0fc1e5f5a6e701fd17",
+      "type": "NoFilter"
+    },
+    {
+      "source": "ed50820938949707ff04",
+      "target": "ef72052926bfb05710cf",
+      "type": "NoFilter"
+    },
+    {
+      "source": "ed50820938949707ff04",
+      "target": "86217e0e2c894189cbf0",
+      "type": "NoFilter"
+    },
+    {
+      "source": "0efdcfa6fc9477f665c9",
+      "target": "0e3e48d1f7be8c170fef",
+      "type": "NoFilter"
+    }
+  ]
 }
