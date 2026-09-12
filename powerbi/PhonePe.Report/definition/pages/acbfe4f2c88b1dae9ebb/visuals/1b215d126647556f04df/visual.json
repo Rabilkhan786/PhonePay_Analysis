@@ -2,10 +2,10 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "1b215d126647556f04df",
   "position": {
-    "x": 24,
-    "y": 15,
-    "width": 1380,
-    "height": 40,
+    "x": 260,
+    "y": 24,
+    "width": 1060,
+    "height": 64,
     "z": 27000,
     "tabOrder": 27000
   },
@@ -15,105 +15,30 @@
       "title": [
         {
           "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
-                }
-              }
-            },
-            "text": {
-              "expr": {
-                "Literal": {
-                  "Value": "''"
-                }
-              }
-            },
-            "fontSize": {
-              "expr": {
-                "Literal": {
-                  "Value": "13D"
-                }
-              }
-            }
+            "show": {"expr": {"Literal": {"Value": "false"}}},
+            "text": {"expr": {"Literal": {"Value": "''"}}},
+            "fontSize": {"expr": {"Literal": {"Value": "13D"}}}
           }
         }
       ],
       "background": [
         {
           "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
-              }
-            },
-            "color": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "'#FFFFFF'"
-                    }
-                  }
-                }
-              }
-            },
-            "transparency": {
-              "expr": {
-                "Literal": {
-                  "Value": "0D"
-                }
-              }
-            }
+            "show": {"expr": {"Literal": {"Value": "false"}}},
+            "transparency": {"expr": {"Literal": {"Value": "100D"}}}
           }
         }
       ],
       "border": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
-                }
-              }
-            }
-          }
-        }
+        {"properties": {"show": {"expr": {"Literal": {"Value": "false"}}}}}
       ],
       "padding": [
         {
           "properties": {
-            "top": {
-              "expr": {
-                "Literal": {
-                  "Value": "10D"
-                }
-              }
-            },
-            "bottom": {
-              "expr": {
-                "Literal": {
-                  "Value": "10D"
-                }
-              }
-            },
-            "left": {
-              "expr": {
-                "Literal": {
-                  "Value": "12D"
-                }
-              }
-            },
-            "right": {
-              "expr": {
-                "Literal": {
-                  "Value": "12D"
-                }
-              }
-            }
+            "top": {"expr": {"Literal": {"Value": "0D"}}},
+            "bottom": {"expr": {"Literal": {"Value": "0D"}}},
+            "left": {"expr": {"Literal": {"Value": "0D"}}},
+            "right": {"expr": {"Literal": {"Value": "0D"}}}
           }
         }
       ]
@@ -126,11 +51,23 @@
               {
                 "textRuns": [
                   {
-                    "value": "03  Merchant Expansion Opportunities",
+                    "value": "PhonePe Merchant Expansion Analytics",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI Semibold",
+                      "fontSize": "34px",
+                      "color": "#45206B"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "India Payments Command Center  |  Decision Snapshot: 2026 Q2",
                     "textStyle": {
                       "fontFamily": "Segoe UI",
-                      "fontSize": "28px",
-                      "color": "#45206B"
+                      "fontSize": "14px",
+                      "color": "#6E647A"
                     }
                   }
                 ]
