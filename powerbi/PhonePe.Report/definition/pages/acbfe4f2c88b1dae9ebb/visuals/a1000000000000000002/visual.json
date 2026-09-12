@@ -1,0 +1,34 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "a1000000000000000002",
+  "position": {"x":18,"y":26,"width":194,"height":1018,"z":200,"tabOrder":200},
+  "visual": {
+    "visualType": "textbox",
+    "visualContainerObjects": {
+      "title":[{"properties":{"show":{"expr":{"Literal":{"Value":"false"}}}}}],
+      "background":[{"properties":{"show":{"expr":{"Literal":{"Value":"false"}}},"transparency":{"expr":{"Literal":{"Value":"100D"}}}}}],
+      "border":[{"properties":{"show":{"expr":{"Literal":{"Value":"false"}}}}}],
+      "padding":[{"properties":{"top":{"expr":{"Literal":{"Value":"0D"}}},"bottom":{"expr":{"Literal":{"Value":"0D"}}},"left":{"expr":{"Literal":{"Value":"0D"}}},"right":{"expr":{"Literal":{"Value":"0D"}}}}}]
+    },
+    "objects":{"general":[{"properties":{"paragraphs":[
+      {"textRuns":[{"value":"पे","textStyle":{"fontFamily":"Segoe UI Semibold","fontSize":"44px","color":"#FFFFFF"}}]},
+      {"textRuns":[{"value":"PhonePe","textStyle":{"fontFamily":"Segoe UI Semibold","fontSize":"28px","color":"#FFFFFF"}}]},
+      {"textRuns":[{"value":"Built for Bharat","textStyle":{"fontFamily":"Segoe UI","fontSize":"12px","color":"#D9C9EE"}}]},
+      {"textRuns":[{"value":" ","textStyle":{"fontFamily":"Segoe UI","fontSize":"18px","color":"#FFFFFF"}}]},
+      {"textRuns":[{"value":"⌂  Home","textStyle":{"fontFamily":"Segoe UI","fontSize":"15px","color":"#F5EEFF"}}]},
+      {"textRuns":[{"value":" ","textStyle":{"fontFamily":"Segoe UI","fontSize":"12px","color":"#FFFFFF"}}]},
+      {"textRuns":[{"value":"▥  Executive Summary","textStyle":{"fontFamily":"Segoe UI","fontSize":"15px","color":"#F5EEFF"}}]},
+      {"textRuns":[{"value":" ","textStyle":{"fontFamily":"Segoe UI","fontSize":"12px","color":"#FFFFFF"}}]},
+      {"textRuns":[{"value":"▣  Digital Payments","textStyle":{"fontFamily":"Segoe UI","fontSize":"15px","color":"#F5EEFF"}}]},
+      {"textRuns":[{"value":" ","textStyle":{"fontFamily":"Segoe UI","fontSize":"12px","color":"#FFFFFF"}}]},
+      {"textRuns":[{"value":"▤  Merchant Penetration","textStyle":{"fontFamily":"Segoe UI","fontSize":"15px","color":"#F5EEFF"}}]},
+      {"textRuns":[{"value":" ","textStyle":{"fontFamily":"Segoe UI","fontSize":"12px","color":"#FFFFFF"}}]},
+      {"textRuns":[{"value":"●  Expansion Opportunities","textStyle":{"fontFamily":"Segoe UI Semibold","fontSize":"15px","color":"#EADFFF"}}]},
+      {"textRuns":[{"value":" ","textStyle":{"fontFamily":"Segoe UI","fontSize":"12px","color":"#FFFFFF"}}]},
+      {"textRuns":[{"value":"▧  Methodology","textStyle":{"fontFamily":"Segoe UI","fontSize":"15px","color":"#F5EEFF"}}]},
+      {"textRuns":[{"value":" ","textStyle":{"fontFamily":"Segoe UI","fontSize":"90px","color":"#FFFFFF"}}]},
+      {"textRuns":[{"value":"Bigger Merchants\nA Stronger Bharat","textStyle":{"fontFamily":"Segoe UI Semibold","fontSize":"18px","color":"#FFFFFF"}}]},
+      {"textRuns":[{"value":"India-focused decision intelligence","textStyle":{"fontFamily":"Segoe UI","fontSize":"11px","color":"#CBB3E4"}}]}
+    ]}}]}
+  }
+}
