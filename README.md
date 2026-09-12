@@ -1,199 +1,88 @@
-# PhonePe Merchant Growth & Digital Payment Opportunity Analysis
+# PhonePe Digital Payments and Merchant Expansion Analysis
 
-**Python · Pandas · MySQL 8 · SQL · Matplotlib · Seaborn · Statistics · Power BI**
+**Python · Pandas · MySQL 8 · SQL · Matplotlib · Seaborn · Power BI · DAX · Statistics**
 
-## Business problem
+This portfolio project answers one practical question: **which states and districts should a merchant-growth team investigate first for merchant acquisition?** It uses the pinned official PhonePe Pulse release from 2018 Q1 through 2026 Q2 and treats 2026 Q2 as the decision snapshot.
 
-Identify Indian states and districts with strong digital-payment demand but comparatively low registered-merchant penetration, then determine which markets are most useful to investigate for merchant expansion.
+The analysis is descriptive and decision-oriented. It does not use machine learning, forecasting, A/B testing, or fabricated ROI assumptions.
 
-This is a prioritisation analysis, not a prediction model. The final ranking is intended to support field research and business investigation rather than claim that merchant acquisition will automatically increase transactions.
+## Executive result
 
-## Data source
+- Q2 2026 recorded **38.66 billion transactions**, **INR 45.50 trillion in value**, **711.65 million registered users**, and **50.71 million registered merchants** in PhonePe's mapped ecosystem.
+- All **783** latest-quarter districts are retained for EDA; **680** meet the scale and history rules for comparable scoring; **624** also meet the positive-momentum rules for the investigation queue.
+- **West Godavari** and **Sangareddy** lead the default queue.
+- Nine default top-ten districts remain under equal weights; six remain when transaction intensity is removed.
+- Seven top-ten districts are in Andhra Pradesh. This concentration calls for local validation before budget concentration.
 
-The project uses the official [PhonePe Pulse](https://github.com/PhonePe/pulse) public dataset.
+The recommendation is to begin field validation with the six candidates that remain in the no-intensity top ten: West Godavari, Sangareddy, Dr BR Ambedkar Konaseema, East Godavari, Sri Potti Sriramulu Nellore, and Alluri Sitharama Raju.
 
-- Coverage: 2018 Q1 through 2026 Q2
-- Geographic levels: state and district
-- Core measures: transaction count, transaction value, registered users, registered merchants
-- Transaction categories: state-level counts
+![District shortlist](reports/eda_charts/04_district_shortlist.png)
 
-The analysis uses one internally consistent PhonePe Pulse release. Historical releases should not be mixed because PhonePe has restated portions of the data.
+## Start here
 
-## Workflow
+1. [`01_data_validation.ipynb`](notebooks/01_data_validation.ipynb) — source provenance, analytical grain, nulls, coverage, category reconciliation, geography reconciliation, and 44 independent SQL/Pandas checks.
+2. [`02_eda.ipynb`](notebooks/02_eda.ipynb) — complete latest-quarter descriptive statistics, univariate distributions for every analytical measure, national trends, category mix, geographic concentration, bivariate relationships, and scale-stratified multivariate analysis.
+3. [`03_statistical_analysis.ipynb`](notebooks/03_statistical_analysis.ipynb) — robust summaries, outlier influence, full Spearman correlation structure, shared-denominator cautions, and within-state associations.
+4. [`04_opportunity_analysis.ipynb`](notebooks/04_opportunity_analysis.ipynb) — eligibility, segments, score distributions, factor profiles, recent persistence, weight sensitivity, threshold sensitivity, and the final research queue.
+5. [`06_business_questions.md`](sql/06_business_questions.md) — 15 numbered portfolio questions, each followed by clean MySQL, an explanation, and a decision-focused insight.
+6. [`business_recommendations.md`](reports/business_recommendations.md) — recommendation, evidence, field-pilot measures, and decision limits.
+7. [`PhonePe.pbip`](powerbi/PhonePe.pbip) or [`PhonePe_Merchant_Expansion_2026.pbix`](powerbi/PhonePe_Merchant_Expansion_2026.pbix) — the canonical Power BI project and portable single-file report.
 
-```text
-Official PhonePe Pulse JSON
-        ↓
-Python extraction
-        ↓
-Transformation and validation
-        ↓
-MySQL analytical tables
-        ↓
-SQL metrics and growth analysis
-        ↓
-EDA and statistical analysis
-        ↓
-Merchant opportunity scoring
-        ↓
-Power BI dashboard
-        ↓
-Business recommendations
+## Analytical design
+
+```mermaid
+flowchart LR
+    A[Pinned official Pulse JSON] --> B[Python extraction]
+    B --> C[Validation and tidy tables]
+    C --> D[MySQL 8 model and metrics]
+    D --> E[Opportunity ranking]
+    E --> F[Independent Pandas verification]
+    F --> G[Executed EDA notebooks]
+    F --> H[Power BI input exports]
+    G --> I[Field-validation recommendation]
 ```
+
+The SQL model preserves the union of transaction, user, and merchant geography-period keys, so historical missing observations remain unknown rather than disappearing through joins. MySQL owns the canonical ratios, growth measures, eligibility rules, scores, and ranks. Pandas independently recomputes each result from the processed source tables.
+
+The opportunity score uses four percentile-ranked factors:
+
+| Factor | Weight | Interpretation |
+|---|---:|---|
+| Transaction YoY growth | 30% | Same-quarter demand momentum |
+| Transactions per merchant | 25% | Demand intensity proxy; includes P2P |
+| Users per merchant | 25% | Relative registration-density gap |
+| Registered users | 20% | Addressable ecosystem scale proxy |
+
+Eligibility requires at least 100,000 registered users, 1,000 registered merchants, one million quarterly transactions, and comparable QoQ/YoY observations. The score prioritizes investigation; it is not a probability, forecast, or causal estimate.
 
 ## Repository structure
 
 ```text
-.
-├── data/
-│   ├── interim/
-│   └── processed/
-├── notebooks/
-│   ├── 01_data_validation.ipynb
-│   ├── 02_eda.ipynb
-│   ├── 03_statistical_analysis.ipynb
-│   └── 04_opportunity_analysis.ipynb
-├── powerbi/
-├── reports/
-│   ├── eda_charts/
-│   └── final_findings.md
-├── sql/
-│   ├── 01_schema.sql
-│   ├── 02_data_quality.sql
-│   ├── 03_metrics.sql
-│   ├── 04_opportunity.sql
-│   └── 05_business_questions.sql
-├── src/
-│   └── phonepe_analytics/
-└── tests/
+src/phonepe_analytics/   Canonical extraction, transformation, validation, MySQL and analysis code
+sql/                     Canonical schema, quality, metric, growth and scoring SQL plus questions
+data/interim/            Source extracts and pinned-source provenance
+data/processed/          Validated analytical tables and MySQL exports
+notebooks/               Four executed, top-to-bottom portfolio walkthroughs
+reports/eda_charts/      All generated EDA charts
+reports/                 Business recommendation
+powerbi/                 Canonical PBIP/PBIX assets, seven model inputs, and screenshot folder
+tests/                   Focused transformation, validation and metric tests
 ```
 
-## Python pipeline
+## Reproduce the project
 
-The reusable project code lives only under `src/phonepe_analytics/`.
-
-- `extract.py` reads the official PhonePe Pulse JSON structure.
-- `transform.py` builds clean state- and district-quarter tables.
-- `validate.py` checks logical keys, ranges, missing values, signs, and geographic reconciliation.
-- `database.py` loads validated data into MySQL and exports analytical views.
-- `metrics.py` contains reusable ratio, growth, and opportunity-score calculations.
-- `utils.py` contains small shared helpers.
-
-The notebooks are for analysis and communication; reusable transformation logic is kept out of notebook cells.
-
-## SQL organization
-
-The SQL layer is intentionally small and sequential.
-
-1. `01_schema.sql` — MySQL source tables and keys
-2. `02_data_quality.sql` — database-level quality summary
-3. `03_metrics.sql` — state, district, and national analytical metrics
-4. `04_opportunity.sql` — opportunity scoring, sensitivity variants, and shortlist
-5. `05_business_questions.sql` — numbered business questions with a query, explanation, and key insight for each task
-
-## Exploratory data analysis
-
-`notebooks/02_eda.ipynb` covers:
-
-- completeness and coverage checks
-- descriptive statistics for scale, value, penetration, and growth measures
-- univariate distributions and outlier counts
-- transaction-category mix
-- users vs transactions
-- merchants vs transactions
-- demand growth vs merchant penetration
-- user growth vs merchant growth
-- Spearman correlation analysis
-- multivariate growth/penetration/scale segmentation
-- indexed national growth comparison
-- IQR outlier review
-
-Charts produced by EDA belong in `reports/eda_charts/`.
-
-## Core metrics
-
-Important measures include:
-
-- total transactions
-- total payment value
-- average transaction value
-- registered users
-- registered merchants
-- merchants per 100K registered users
-- users per registered merchant
-- transactions per registered user
-- TPV per registered user
-- QoQ transaction, TPV, user, and merchant growth
-- same-quarter YoY transaction growth
-
-`transactions_per_merchant` is treated as an ecosystem-intensity proxy, not as a direct count of merchant transactions, because district transaction totals are not merchant-only transactions.
-
-## Opportunity analysis
-
-The opportunity framework combines:
-
-- transaction growth
-- transaction intensity
-- relative merchant penetration
-- registered-user scale
-
-Minimum scale filters reduce unstable rankings from very small districts. The project also calculates an equal-weight score and a score without transaction intensity so the leading districts can be checked under alternative assumptions.
-
-The score is a prioritisation tool, not a causal model or a forecast of business impact.
-
-## Power BI
-
-Power BI uses the cleaned analytical outputs rather than raw PhonePe JSON files. The report is designed to communicate:
-
-- executive payment trends
-- merchant landscape and penetration
-- district expansion opportunities
-- final business recommendations
-
-Power BI assets are stored under `powerbi/`. EDA charts and Power BI screenshots should remain separate.
-
-## Run locally
-
-### 1. Install dependencies
+Requirements: `uv`, Python 3.12 or newer, and an isolated MySQL 8 database. Copy `.env.example` to `.env` and provide the five connection values.
 
 ```bash
 uv sync
-```
-
-### 2. Configure MySQL
-
-Copy `.env.example` to `.env` and set:
-
-```text
-MYSQL_HOST=
-MYSQL_PORT=
-MYSQL_DATABASE=
-MYSQL_USER=
-MYSQL_PASSWORD=
-```
-
-### 3. Extract the official PhonePe source
-
-```bash
-uv run python -m phonepe_analytics.extract --raw work/pulse
-```
-
-### 4. Transform and validate
-
-```bash
+uv run python -m phonepe_analytics.extract --raw path/to/pinned/PhonePe-pulse
 uv run python -m phonepe_analytics.transform
 uv run python -m phonepe_analytics.validate
-```
-
-### 5. Load MySQL and build analytical views
-
-Create the database named in `MYSQL_DATABASE`, then run:
-
-```bash
 uv run python -m phonepe_analytics.database
+uv run python -m phonepe_analytics.analysis
 ```
 
-### 6. Run quality checks
+Execute and save all notebooks from the repository root with `nbclient` or Jupyter's execute-in-place command. Then run the quality gates:
 
 ```bash
 uv run ruff format --check .
@@ -201,19 +90,13 @@ uv run ruff check .
 uv run pytest
 ```
 
-### 7. Review notebooks
+For Power BI, open the PBIP project, edit the `DataFolder` parameter to the absolute `powerbi/data` path on your machine, then refresh. The repository stores screenshots only in `powerbi/charts`.
 
-Run the notebooks in numerical order from `notebooks/`.
+## Data source and limits
 
-## Limitations
+- Source: [official PhonePe Pulse repository](https://github.com/PhonePe/pulse)
+- Pinned commit: `943e6e52a71513d683f804add12d0b61145e8007`
+- Coverage: 2018 Q1–2026 Q2
+- Provenance and per-file hashes: [`data/interim/source_manifest.json`](data/interim/source_manifest.json)
 
-- Registered users are cumulative registrations, not active users.
-- Registered merchants are registrations, not necessarily active merchants.
-- District transaction totals are ecosystem activity and should not be interpreted as merchant-only payments.
-- Public data does not include merchant acquisition cost, competitor coverage, active merchant counts, revenue, or realised expansion outcomes.
-- Correlation and geographic association do not establish causation.
-- Opportunity scores depend on documented thresholds and weights and should be validated through sensitivity analysis and field research.
-
-## Final output
-
-The project is designed to answer one decision clearly: **which states and districts should be investigated first for merchant expansion, and what evidence supports that priority?**
+PhonePe restated its history in the pinned release, so this series should not be combined with older releases. Pulse covers PhonePe's ecosystem rather than the whole Indian UPI market. Registered users and merchants are cumulative registrations rather than active participants. District transaction totals contain all categories, including P2P; category counts are available only at state level. The public data does not contain active acceptance, competitor coverage, local shop counts, acquisition cost, revenue, or realized business impact.

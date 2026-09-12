@@ -1,4 +1,6 @@
 check,table,failures
+nonempty_table,state,0
+invalid_period_id,state,0
 duplicate_logical_keys,state,0
 null_state,state,0
 invalid_year,state,0
@@ -7,7 +9,11 @@ negative_transaction_count,state,0
 negative_transaction_amount,state,0
 negative_registered_users,state,0
 negative_registered_merchants,state,0
+latest_period_present,state,0
+beyond_analysis_end,state,0
 latest_core_values_complete,state,0
+nonempty_table,district,0
+invalid_period_id,district,0
 duplicate_logical_keys,district,0
 null_state,district,0
 invalid_year,district,0
@@ -17,6 +23,8 @@ negative_transaction_count,district,0
 negative_transaction_amount,district,0
 negative_registered_users,district,0
 negative_registered_merchants,district,0
+latest_period_present,district,0
+beyond_analysis_end,district,0
 latest_core_values_complete,district,0
 district_state_count_reconciliation,geography,0
 district_state_user_reconciliation,geography,0

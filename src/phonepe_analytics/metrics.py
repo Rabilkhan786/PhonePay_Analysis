@@ -52,7 +52,14 @@ def add_growth_metrics(frame: pd.DataFrame, group_columns: list[str]) -> pd.Data
     previous_period = grouped["period_id"].shift(1)
     for metric in metrics:
         previous = grouped[metric].shift(1)
-        result[f"{metric}_qoq"] = (safe_divide(result[metric], previous) - 1).where(
+        result[
+            {
+                "transaction_count": "transaction_qoq",
+                "transaction_amount": "tpv_qoq",
+                "registered_users": "user_qoq",
+                "registered_merchants": "merchant_qoq",
+            }[metric]
+        ] = (safe_divide(result[metric], previous) - 1).where(
             result["period_id"].sub(previous_period).eq(1)
         )
     prior_year = result[group_columns + ["period_id", "transaction_count"]].copy()
@@ -82,31 +89,58 @@ def score_opportunities(
     minimum_transactions: int = 1_000_000,
 ) -> pd.DataFrame:
     """Create a defensible 0–100 score for comparable district records."""
-    if not np.isclose(sum(weights.values()), 1.0):
-        raise ValueError("Opportunity weights must sum to 1")
+    if (
+        set(weights) != set(DEFAULT_WEIGHTS)
+        or any(not np.isfinite(value) or value < 0 for value in weights.values())
+        or not np.isclose(sum(weights.values()), 1.0)
+    ):
+        raise ValueError(
+            "Use the four scoring factors with nonnegative finite weights summing to 1"
+        )
+    if frame["period_id"].nunique() > 1:
+        raise ValueError("Score one quarter at a time")
     eligible = frame.loc[
         frame["registered_users"].ge(minimum_users)
         & frame["registered_merchants"].ge(minimum_merchants)
+        & frame["registered_merchants"].gt(0)
         & frame["transaction_count"].ge(minimum_transactions)
-    ].dropna(subset=list(weights))
+    ].dropna(subset=[*DEFAULT_WEIGHTS, "transaction_qoq"])
     result = eligible.copy()
-    score = pd.Series(0.0, index=result.index)
-    for metric, weight in weights.items():
-        rank_column = f"{metric}_percentile"
-        result[rank_column] = percentile_rank(result[metric])
-        score += result[rank_column] * weight * 100
-    result["opportunity_score"] = score.clip(0, 100)
-    score_q3 = result["opportunity_score"].quantile(0.75)
-    score_median = result["opportunity_score"].median()
-    scale_q3 = result["registered_users_percentile"].quantile(0.75)
-    low_penetration = result["users_per_merchant_percentile"].ge(0.5)
+    factors = {
+        "transaction_yoy": "growth_percentile",
+        "transactions_per_merchant": "intensity_percentile",
+        "users_per_merchant": "low_penetration_percentile",
+        "registered_users": "scale_percentile",
+    }
+    for metric, column in factors.items():
+        result[column] = percentile_rank(result[metric])
+    result["opportunity_score"] = sum(result[factors[m]] * w * 100 for m, w in weights.items())
+    result["equal_weight_score"] = 25 * result[list(factors.values())].sum(axis=1)
+    result["no_intensity_score"] = 100 * (
+        0.40 * result["growth_percentile"]
+        + 0.35 * result["low_penetration_percentile"]
+        + 0.25 * result["scale_percentile"]
+    )
+    # Stabilize mathematical ties across MySQL and NumPy floating-point arithmetic.
+    scores = ["opportunity_score", "equal_weight_score", "no_intensity_score"]
+    result[scores] = result[scores].round(10)
+    result["opportunity_percentile"] = percentile_rank(result["opportunity_score"])
     result["business_segment"] = np.select(
         [
-            result["opportunity_score"].ge(score_q3) & low_penetration,
-            result["registered_users_percentile"].ge(scale_q3) & ~low_penetration,
-            result["opportunity_score"].ge(score_median),
+            result["opportunity_percentile"].ge(0.75)
+            & result["low_penetration_percentile"].ge(0.50),
+            result["scale_percentile"].ge(0.75) & result["low_penetration_percentile"].lt(0.50),
+            result["opportunity_percentile"].ge(0.50),
         ],
         ["EXPAND", "DEFEND", "DEVELOP"],
         default="MONITOR",
     )
-    return result.sort_values("opportunity_score", ascending=False)
+    for score, rank in [
+        ("opportunity_score", "opportunity_rank"),
+        ("equal_weight_score", "equal_weight_rank"),
+        ("no_intensity_score", "no_intensity_rank"),
+    ]:
+        result[rank] = result[score].rank(method="min", ascending=False).astype(int)
+    return result.sort_values(
+        ["opportunity_score", "state", "district"], ascending=[False, True, True]
+    )

@@ -1,7 +1,7 @@
 """Project paths and environment-backed database settings."""
 
-from dataclasses import dataclass
 import os
+from dataclasses import dataclass
 from pathlib import Path
 from urllib.parse import quote_plus
 

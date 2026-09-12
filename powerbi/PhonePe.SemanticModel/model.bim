@@ -191,7 +191,7 @@
           {
             "name": "Transaction Value INR",
             "expression": "VAR p = MAX(Periods[Period ID]) RETURN CALCULATE(SUM(Payments[Value INR]), KEEPFILTERS(Periods[Period ID] = p))",
-            "formatString": "₹#,0",
+            "formatString": "INR #,0",
             "description": ""
           },
           {
@@ -215,7 +215,7 @@
           {
             "name": "Value Trillion INR",
             "expression": "DIVIDE([Transaction Value INR], 1000000000000)",
-            "formatString": "\"₹\"0.00\" T\"",
+            "formatString": "\"INR \"0.00\" T\"",
             "description": ""
           },
           {
@@ -233,7 +233,7 @@
           {
             "name": "Average Transaction Value",
             "expression": "DIVIDE([Transaction Value INR], [Transaction Volume])",
-            "formatString": "₹#,0.00",
+            "formatString": "INR #,0.00",
             "description": ""
           },
           {
@@ -251,7 +251,7 @@
           {
             "name": "Value per Merchant",
             "expression": "DIVIDE([Transaction Value INR], [Registered Merchant Base])",
-            "formatString": "₹#,0",
+            "formatString": "INR #,0",
             "description": ""
           },
           {
@@ -262,25 +262,57 @@
           },
           {
             "name": "Transaction QoQ",
-            "expression": "VAR p = MAX(Periods[Period ID]) VAR previous = CALCULATE([Transaction Volume], REMOVEFILTERS(Periods), Periods[Period ID] = p - 1) RETURN IF(NOT ISBLANK(previous), DIVIDE([Transaction Volume], previous) - 1)",
+            "expression": [
+              "VAR CurrentPeriod = MAX(Periods[Period ID])",
+              "VAR CurrentValue = [Transaction Volume]",
+              "VAR PreviousValue =",
+              "    CALCULATE([Transaction Volume], REMOVEFILTERS(Periods), Periods[Period ID] = CurrentPeriod - 1)",
+              "RETURN",
+              "    IF(NOT ISBLANK(CurrentValue) && PreviousValue > 0,",
+              "        DIVIDE(CurrentValue, PreviousValue) - 1)"
+            ],
             "formatString": "0.0%",
             "description": ""
           },
           {
             "name": "Transaction YoY",
-            "expression": "VAR p = MAX(Periods[Period ID]) VAR previous = CALCULATE([Transaction Volume], REMOVEFILTERS(Periods), Periods[Period ID] = p - 4) RETURN IF(NOT ISBLANK(previous), DIVIDE([Transaction Volume], previous) - 1)",
+            "expression": [
+              "VAR CurrentPeriod = MAX(Periods[Period ID])",
+              "VAR CurrentValue = [Transaction Volume]",
+              "VAR PreviousValue =",
+              "    CALCULATE([Transaction Volume], REMOVEFILTERS(Periods), Periods[Period ID] = CurrentPeriod - 4)",
+              "RETURN",
+              "    IF(NOT ISBLANK(CurrentValue) && PreviousValue > 0,",
+              "        DIVIDE(CurrentValue, PreviousValue) - 1)"
+            ],
             "formatString": "0.0%",
             "description": ""
           },
           {
             "name": "Merchant QoQ",
-            "expression": "VAR p = MAX(Periods[Period ID]) VAR previous = CALCULATE([Registered Merchant Base], REMOVEFILTERS(Periods), Periods[Period ID] = p - 1) RETURN IF(NOT ISBLANK(previous), DIVIDE([Registered Merchant Base], previous) - 1)",
+            "expression": [
+              "VAR CurrentPeriod = MAX(Periods[Period ID])",
+              "VAR CurrentValue = [Registered Merchant Base]",
+              "VAR PreviousValue =",
+              "    CALCULATE([Registered Merchant Base], REMOVEFILTERS(Periods), Periods[Period ID] = CurrentPeriod - 1)",
+              "RETURN",
+              "    IF(NOT ISBLANK(CurrentValue) && PreviousValue > 0,",
+              "        DIVIDE(CurrentValue, PreviousValue) - 1)"
+            ],
             "formatString": "0.0%",
             "description": ""
           },
           {
             "name": "User QoQ",
-            "expression": "VAR p = MAX(Periods[Period ID]) VAR previous = CALCULATE([Registered User Base], REMOVEFILTERS(Periods), Periods[Period ID] = p - 1) RETURN IF(NOT ISBLANK(previous), DIVIDE([Registered User Base], previous) - 1)",
+            "expression": [
+              "VAR CurrentPeriod = MAX(Periods[Period ID])",
+              "VAR CurrentValue = [Registered User Base]",
+              "VAR PreviousValue =",
+              "    CALCULATE([Registered User Base], REMOVEFILTERS(Periods), Periods[Period ID] = CurrentPeriod - 1)",
+              "RETURN",
+              "    IF(NOT ISBLANK(CurrentValue) && PreviousValue > 0,",
+              "        DIVIDE(CurrentValue, PreviousValue) - 1)"
+            ],
             "formatString": "0.0%",
             "description": ""
           },
@@ -614,7 +646,7 @@
       {
         "name": "DataFolder",
         "kind": "m",
-        "expression": "\"D:/PhonePe-Merchant-Expansion-2026/powerbi/data\" meta [IsParameterQuery=true, Type=\"Text\", IsParameterQueryRequired=true]"
+        "expression": "\"C:/path/to/PhonePay_Analysis/powerbi/data\" meta [IsParameterQuery=true, Type=\"Text\", IsParameterQueryRequired=true]"
       }
     ]
   }
