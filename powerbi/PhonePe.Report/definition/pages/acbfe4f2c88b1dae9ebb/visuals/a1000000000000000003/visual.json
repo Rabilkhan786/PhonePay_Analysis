@@ -1,0 +1,15 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "a1000000000000000003",
+  "position": {"x":8,"y":438,"width":214,"height":64,"z":150,"tabOrder":150},
+  "visual": {
+    "visualType":"textbox",
+    "visualContainerObjects":{
+      "title":[{"properties":{"show":{"expr":{"Literal":{"Value":"false"}}}}}],
+      "background":[{"properties":{"show":{"expr":{"Literal":{"Value":"true"}}},"color":{"solid":{"color":{"expr":{"Literal":{"Value":"'#E9DDF7'"}}}}},"transparency":{"expr":{"Literal":{"Value":"0D"}}}}}],
+      "border":[{"properties":{"show":{"expr":{"Literal":{"Value":"false"}}}}}],
+      "padding":[{"properties":{"top":{"expr":{"Literal":{"Value":"0D"}}},"bottom":{"expr":{"Literal":{"Value":"0D"}}},"left":{"expr":{"Literal":{"Value":"0D"}}},"right":{"expr":{"Literal":{"Value":"0D"}}}}}]
+    },
+    "objects":{"general":[{"properties":{"paragraphs":[{"textRuns":[{"value":" ","textStyle":{"fontFamily":"Segoe UI","fontSize":"10px","color":"#5F259F"}}]}]}}]}
+  }
+}
