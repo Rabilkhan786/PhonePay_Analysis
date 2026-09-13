@@ -112,6 +112,16 @@
           "name": "IndiaStates.topojson",
           "path": "IndiaStates.topojson",
           "type": "ShapeMap"
+        },
+        {
+          "name": "PhonePeFinanceBackground.svg",
+          "path": "PhonePeFinanceBackground.svg",
+          "type": "Image"
+        },
+        {
+          "name": "PhonePeMerchantDecor.svg",
+          "path": "PhonePeMerchantDecor.svg",
+          "type": "Image"
         }
       ]
     }
