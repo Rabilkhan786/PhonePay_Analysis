@@ -404,6 +404,13 @@
                   }
                 }
               }
+            },
+            "end": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
+                }
+              }
             }
           }
         }
@@ -456,6 +463,13 @@
                   }
                 }
               }
+            },
+            "end": {
+              "expr": {
+                "Literal": {
+                  "Value": "105D"
+                }
+              }
             }
           }
         }
@@ -473,7 +487,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "10D"
+                  "Value": "8D"
                 }
               }
             },

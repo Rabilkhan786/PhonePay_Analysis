@@ -25,7 +25,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Top district opportunities'"
+                  "Value": "'Top 5 District Opportunities'"
                 }
               }
             },
@@ -305,7 +305,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Top 8 eligible districts in selected geography'"
+                  "Value": "'Top 5 eligible districts in selected geography'"
                 }
               }
             },
@@ -362,7 +362,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "11D"
+                  "Value": "9D"
                 }
               }
             },
@@ -388,6 +388,20 @@
               "expr": {
                 "Literal": {
                   "Value": "false"
+                }
+              }
+            },
+            "maxMarginFactor": {
+              "expr": {
+                "Literal": {
+                  "Value": "45D"
+                }
+              }
+            },
+            "preferredCategoryWidth": {
+              "expr": {
+                "Literal": {
+                  "Value": "12D"
                 }
               }
             }
@@ -512,8 +526,123 @@
                 }
               },
               "queryRef": "Districts.District Chart Label",
-              "nativeQueryRef": "District",
-              "displayName": "District"
+              "nativeQueryRef": "District opportunity",
+              "active": true,
+              "displayName": "District opportunity"
+            }
+          ]
+        },
+        "Tooltips": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Districts"
+                        }
+                      },
+                      "Property": "District"
+                    }
+                  },
+                  "Function": 3
+                }
+              },
+              "queryRef": "Min(Districts.District)",
+              "nativeQueryRef": "District name",
+              "displayName": "District name"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Districts"
+                        }
+                      },
+                      "Property": "State"
+                    }
+                  },
+                  "Function": 3
+                }
+              },
+              "queryRef": "Min(Districts.State)",
+              "nativeQueryRef": "District state",
+              "displayName": "District state"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Opportunities"
+                    }
+                  },
+                  "Property": "Opportunity YoY"
+                }
+              },
+              "queryRef": "Opportunities.Opportunity YoY",
+              "nativeQueryRef": "Opportunity YoY",
+              "displayName": "Opportunity YoY"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Opportunities"
+                    }
+                  },
+                  "Property": "Opportunity Users per Merchant"
+                }
+              },
+              "queryRef": "Opportunities.Opportunity Users per Merchant",
+              "nativeQueryRef": "Opportunity Users per Merchant",
+              "displayName": "Opportunity Users per Merchant"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Opportunities"
+                        }
+                      },
+                      "Property": "Transactions per Merchant"
+                    }
+                  },
+                  "Function": 4
+                }
+              },
+              "queryRef": "Max(Opportunities.Transactions per Merchant)",
+              "nativeQueryRef": "Snapshot transactions per merchant",
+              "displayName": "Snapshot transactions per merchant"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Opportunities"
+                        }
+                      },
+                      "Property": "Users"
+                    }
+                  },
+                  "Function": 4
+                }
+              },
+              "queryRef": "Max(Opportunities.Users)",
+              "nativeQueryRef": "Snapshot registered users (scale)",
+              "displayName": "Snapshot registered users (scale)"
             }
           ]
         },
@@ -535,55 +664,6 @@
               "displayName": "Opportunity Score"
             }
           ]
-        },
-        "Tooltips": {
-          "projections": [
-            {
-              "field": {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "Districts"
-                    }
-                  },
-                  "Property": "District"
-                }
-              },
-              "queryRef": "Districts.District",
-              "nativeQueryRef": "District",
-              "displayName": "District"
-            },
-            {
-              "field": {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "Districts"
-                    }
-                  },
-                  "Property": "State"
-                }
-              },
-              "queryRef": "Districts.State",
-              "nativeQueryRef": "State",
-              "displayName": "State"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "Opportunities"
-                    }
-                  },
-                  "Property": "Opportunity YoY"
-                }
-              },
-              "queryRef": "Opportunities.Opportunity YoY",
-              "nativeQueryRef": "Opportunity YoY",
-              "displayName": "Opportunity YoY"
-            }
-          ]
         }
       },
       "sortDefinition": {
@@ -601,8 +681,7 @@
             },
             "direction": "Descending"
           }
-        ],
-        "isDefaultSort": false
+        ]
       }
     }
   },
@@ -621,7 +700,6 @@
           }
         },
         "type": "Advanced",
-        "howCreated": "User",
         "filter": {
           "Version": 2,
           "From": [
@@ -648,14 +726,15 @@
                   },
                   "Right": {
                     "Literal": {
-                      "Value": "8D"
+                      "Value": "5D"
                     }
                   }
                 }
               }
             }
           ]
-        }
+        },
+        "howCreated": "User"
       }
     ]
   }

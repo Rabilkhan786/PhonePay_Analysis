@@ -10,7 +10,7 @@
     "tabOrder": 36000
   },
   "visual": {
-    "visualType": "azureMap",
+    "visualType": "shapeMap",
     "visualContainerObjects": {
       "title": [
         {
@@ -339,93 +339,94 @@
       ]
     },
     "objects": {
-      "mapControls": [
+      "shape": [
         {
           "properties": {
-            "defaultStyle": {
+            "datasourceType": {
               "expr": {
                 "Literal": {
-                  "Value": "'road'"
+                  "Value": "'file_upload'"
                 }
               }
             },
-            "autoZoom": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
+            "map": {
+              "geoJson": {
+                "type": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'packaged'"
+                    }
+                  }
+                },
+                "name": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'IndiaStates.topojson'"
+                    }
+                  }
+                },
+                "content": {
+                  "expr": {
+                    "ResourcePackageItem": {
+                      "PackageName": "RegisteredResources",
+                      "PackageType": 1,
+                      "ItemName": "IndiaStates.topojson"
+                    }
+                  }
                 }
               }
             },
-            "centerLatitude": {
+            "projectionEnum": {
               "expr": {
                 "Literal": {
-                  "Value": "22.6D"
-                }
-              }
-            },
-            "centerLongitude": {
-              "expr": {
-                "Literal": {
-                  "Value": "79D"
-                }
-              }
-            },
-            "zoom": {
-              "expr": {
-                "Literal": {
-                  "Value": "3.6D"
-                }
-              }
-            },
-            "showLabels": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
-              }
-            },
-            "showNavigationControls": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
-              }
-            },
-            "showSelectionControl": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
-              }
-            },
-            "showStylePicker": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
-                }
-              }
-            },
-            "showAdminDistrictBorders": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
-              }
-            },
-            "showAdminDistrict2Borders": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
+                  "Value": "'equirectangular'"
                 }
               }
             }
           }
         }
       ],
-      "filledMap": [
+      "dataPoint": [
         {
           "properties": {
-            "show": {
+            "fillRule": {
+              "linearGradient2": {
+                "min": {
+                  "color": {
+                    "expr": {
+                      "Literal": {
+                        "Value": "'#E8D7FB'"
+                      }
+                    }
+                  }
+                },
+                "max": {
+                  "color": {
+                    "expr": {
+                      "Literal": {
+                        "Value": "'#5F259F'"
+                      }
+                    }
+                  }
+                },
+                "nullColoringStrategy": {
+                  "strategy": {
+                    "expr": {
+                      "Literal": {
+                        "Value": "'asNull'"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "defaultColors": [
+        {
+          "properties": {
+            "defaultShow": {
               "expr": {
                 "Literal": {
                   "Value": "true"
@@ -436,57 +437,52 @@
               "solid": {
                 "color": {
                   "expr": {
-                    "Measure": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "Opportunities"
-                        }
-                      },
-                      "Property": "Opportunity Map Colour"
+                    "Literal": {
+                      "Value": "'#EEEAF4'"
                     }
                   }
                 }
               }
             },
-            "borderShow": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
-              }
-            },
-            "strokeColor": {
+            "borderColor": {
               "solid": {
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#F5EDFF'"
+                      "Value": "'#FFFFFF'"
                     }
                   }
                 }
               }
             },
-            "strokeWidth": {
+            "borderThickness": {
               "expr": {
                 "Literal": {
-                  "Value": "1D"
-                }
-              }
-            },
-            "mapTransparency": {
-              "expr": {
-                "Literal": {
-                  "Value": "8D"
+                  "Value": "0.7D"
                 }
               }
             }
           }
         }
       ],
-      "bubbleLayer": [
+      "zoom": [
         {
           "properties": {
-            "show": {
+            "autoZoom": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "selectionZoom": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "manualZoom": {
               "expr": {
                 "Literal": {
                   "Value": "false"
@@ -522,16 +518,16 @@
                       "Entity": "States"
                     }
                   },
-                  "Property": "Map Location"
+                  "Property": "State"
                 }
               },
-              "queryRef": "States.Map Location",
-              "nativeQueryRef": "Map Location",
-              "displayName": "Map Location"
+              "queryRef": "States.State",
+              "nativeQueryRef": "State",
+              "displayName": "State"
             }
           ]
         },
-        "Size": {
+        "Value": {
           "projections": [
             {
               "field": {
@@ -554,18 +550,113 @@
           "projections": [
             {
               "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "States"
+                        }
+                      },
+                      "Property": "State Label"
+                    }
+                  },
+                  "Function": 3
+                }
+              },
+              "queryRef": "Min(States.State Label)",
+              "nativeQueryRef": "State name",
+              "displayName": "State name"
+            },
+            {
+              "field": {
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Opportunities"
+                      "Entity": "Payments"
                     }
                   },
-                  "Property": "State Average Opportunity Score"
+                  "Property": "Transaction Value INR"
                 }
               },
-              "queryRef": "Opportunities.State Average Opportunity Score",
-              "nativeQueryRef": "State Average Opportunity Score",
-              "displayName": "State Average Opportunity Score"
+              "queryRef": "Payments.Transaction Value INR",
+              "nativeQueryRef": "Transaction Value INR",
+              "displayName": "Transaction Value INR"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Payments"
+                    }
+                  },
+                  "Property": "Transaction Volume"
+                }
+              },
+              "queryRef": "Payments.Transaction Volume",
+              "nativeQueryRef": "Transaction Volume",
+              "displayName": "Transaction Volume"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Payments"
+                    }
+                  },
+                  "Property": "Users Million"
+                }
+              },
+              "queryRef": "Payments.Users Million",
+              "nativeQueryRef": "Registered Users (M)",
+              "displayName": "Registered Users (M)"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Payments"
+                    }
+                  },
+                  "Property": "Merchants Million"
+                }
+              },
+              "queryRef": "Payments.Merchants Million",
+              "nativeQueryRef": "Registered Merchants (M)",
+              "displayName": "Registered Merchants (M)"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Payments"
+                    }
+                  },
+                  "Property": "Transaction YoY"
+                }
+              },
+              "queryRef": "Payments.Transaction YoY",
+              "nativeQueryRef": "Transaction YoY",
+              "displayName": "Transaction YoY"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Payments"
+                    }
+                  },
+                  "Property": "Users per Merchant"
+                }
+              },
+              "queryRef": "Payments.Users per Merchant",
+              "nativeQueryRef": "Users per Merchant",
+              "displayName": "Users per Merchant"
             },
             {
               "field": {
@@ -581,36 +672,6 @@
               "queryRef": "Opportunities.Eligible Districts",
               "nativeQueryRef": "Eligible Districts",
               "displayName": "Eligible Districts"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "Opportunities"
-                    }
-                  },
-                  "Property": "Leading Opportunity Score"
-                }
-              },
-              "queryRef": "Opportunities.Leading Opportunity Score",
-              "nativeQueryRef": "Leading Opportunity Score",
-              "displayName": "Leading Opportunity Score"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "Opportunities"
-                    }
-                  },
-                  "Property": "Leading Opportunity YoY"
-                }
-              },
-              "queryRef": "Opportunities.Leading Opportunity YoY",
-              "nativeQueryRef": "Leading Opportunity YoY",
-              "displayName": "Leading Opportunity YoY"
             }
           ]
         }

@@ -107,6 +107,11 @@
           "name": "PhonePeIconBulb20260912.svg",
           "path": "PhonePeIconBulb20260912.svg",
           "type": "Image"
+        },
+        {
+          "name": "IndiaStates.topojson",
+          "path": "IndiaStates.topojson",
+          "type": "ShapeMap"
         }
       ]
     }

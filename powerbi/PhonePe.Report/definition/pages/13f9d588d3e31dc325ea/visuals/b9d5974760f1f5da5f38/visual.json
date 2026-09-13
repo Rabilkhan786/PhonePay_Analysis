@@ -10,7 +10,7 @@
     "tabOrder": 38000
   },
   "visual": {
-    "visualType": "azureMap",
+    "visualType": "shapeMap",
     "visualContainerObjects": {
       "title": [
         {
@@ -339,93 +339,94 @@
       ]
     },
     "objects": {
-      "mapControls": [
+      "shape": [
         {
           "properties": {
-            "defaultStyle": {
+            "datasourceType": {
               "expr": {
                 "Literal": {
-                  "Value": "'road'"
+                  "Value": "'file_upload'"
                 }
               }
             },
-            "autoZoom": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
+            "map": {
+              "geoJson": {
+                "type": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'packaged'"
+                    }
+                  }
+                },
+                "name": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'IndiaStates.topojson'"
+                    }
+                  }
+                },
+                "content": {
+                  "expr": {
+                    "ResourcePackageItem": {
+                      "PackageName": "RegisteredResources",
+                      "PackageType": 1,
+                      "ItemName": "IndiaStates.topojson"
+                    }
+                  }
                 }
               }
             },
-            "centerLatitude": {
+            "projectionEnum": {
               "expr": {
                 "Literal": {
-                  "Value": "22.6D"
-                }
-              }
-            },
-            "centerLongitude": {
-              "expr": {
-                "Literal": {
-                  "Value": "79D"
-                }
-              }
-            },
-            "zoom": {
-              "expr": {
-                "Literal": {
-                  "Value": "2.4D"
-                }
-              }
-            },
-            "showLabels": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
-              }
-            },
-            "showNavigationControls": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
-              }
-            },
-            "showSelectionControl": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
-              }
-            },
-            "showStylePicker": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
-                }
-              }
-            },
-            "showAdminDistrictBorders": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
-              }
-            },
-            "showAdminDistrict2Borders": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
+                  "Value": "'equirectangular'"
                 }
               }
             }
           }
         }
       ],
-      "filledMap": [
+      "dataPoint": [
         {
           "properties": {
-            "show": {
+            "fillRule": {
+              "linearGradient2": {
+                "min": {
+                  "color": {
+                    "expr": {
+                      "Literal": {
+                        "Value": "'#E8D7FB'"
+                      }
+                    }
+                  }
+                },
+                "max": {
+                  "color": {
+                    "expr": {
+                      "Literal": {
+                        "Value": "'#5F259F'"
+                      }
+                    }
+                  }
+                },
+                "nullColoringStrategy": {
+                  "strategy": {
+                    "expr": {
+                      "Literal": {
+                        "Value": "'asNull'"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "defaultColors": [
+        {
+          "properties": {
+            "defaultShow": {
               "expr": {
                 "Literal": {
                   "Value": "true"
@@ -436,57 +437,52 @@
               "solid": {
                 "color": {
                   "expr": {
-                    "Measure": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "Payments"
-                        }
-                      },
-                      "Property": "Merchant Map Colour"
+                    "Literal": {
+                      "Value": "'#EEEAF4'"
                     }
                   }
                 }
               }
             },
-            "borderShow": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
-              }
-            },
-            "strokeColor": {
+            "borderColor": {
               "solid": {
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#F5EDFF'"
+                      "Value": "'#FFFFFF'"
                     }
                   }
                 }
               }
             },
-            "strokeWidth": {
+            "borderThickness": {
               "expr": {
                 "Literal": {
-                  "Value": "1D"
-                }
-              }
-            },
-            "mapTransparency": {
-              "expr": {
-                "Literal": {
-                  "Value": "8D"
+                  "Value": "0.7D"
                 }
               }
             }
           }
         }
       ],
-      "bubbleLayer": [
+      "zoom": [
         {
           "properties": {
-            "show": {
+            "autoZoom": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "selectionZoom": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "manualZoom": {
               "expr": {
                 "Literal": {
                   "Value": "false"
@@ -522,16 +518,16 @@
                       "Entity": "States"
                     }
                   },
-                  "Property": "Map Location"
+                  "Property": "State"
                 }
               },
-              "queryRef": "States.Map Location",
-              "nativeQueryRef": "Map Location",
-              "displayName": "Map Location"
+              "queryRef": "States.State",
+              "nativeQueryRef": "State",
+              "displayName": "State"
             }
           ]
         },
-        "Size": {
+        "Value": {
           "projections": [
             {
               "field": {
@@ -554,18 +550,23 @@
           "projections": [
             {
               "field": {
-                "Measure": {
+                "Aggregation": {
                   "Expression": {
-                    "SourceRef": {
-                      "Entity": "Payments"
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "States"
+                        }
+                      },
+                      "Property": "State Label"
                     }
                   },
-                  "Property": "Merchants per 1000 Users"
+                  "Function": 3
                 }
               },
-              "queryRef": "Payments.Merchants per 1000 Users",
-              "nativeQueryRef": "Merchants per 1000 Users",
-              "displayName": "Merchants per 1000 Users"
+              "queryRef": "Min(States.State Label)",
+              "nativeQueryRef": "State name",
+              "displayName": "State name"
             },
             {
               "field": {

@@ -1,6 +1,6 @@
 {
   "name": "PhonePe Merchant Expansion",
-  "compatibilityLevel": 1567,
+  "compatibilityLevel": 1606,
   "model": {
     "culture": "en-US",
     "defaultPowerBIDataSourceVersion": "powerBI_V3",
@@ -506,6 +506,16 @@
               "VAR Change = [ATV QoQ] RETURN IF(ISBLANK(Change), \"#716586\", IF(Change >= 0, \"#087B51\", \"#BB3656\"))"
             ],
             "displayFolder": "Report presentation"
+          },
+          {
+            "name": "Transaction Value Label",
+            "expression": "FORMAT([Value Trillion INR], \"₹0.00\"\"T\"\"\")",
+            "displayFolder": "Presentation"
+          },
+          {
+            "name": "Average Transaction Value Label",
+            "expression": "FORMAT([Average Transaction Value], \"₹#,0\")",
+            "displayFolder": "Presentation"
           }
         ]
       },

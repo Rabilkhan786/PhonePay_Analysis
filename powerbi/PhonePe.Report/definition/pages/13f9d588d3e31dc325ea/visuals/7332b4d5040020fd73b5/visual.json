@@ -395,10 +395,10 @@
                       "Entity": "Districts"
                     }
                   },
-                  "Property": "District"
+                  "Property": "District Chart Label"
                 }
               },
-              "queryRef": "Districts.District",
+              "queryRef": "Districts.District Chart Label",
               "nativeQueryRef": "District",
               "displayName": "District"
             }

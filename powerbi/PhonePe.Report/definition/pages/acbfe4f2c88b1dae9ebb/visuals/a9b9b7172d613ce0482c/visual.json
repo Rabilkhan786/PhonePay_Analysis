@@ -312,7 +312,7 @@
             "tooltip": {
               "expr": {
                 "Literal": {
-                  "Value": "'Digital Payments\nOverview'"
+                  "Value": "'Digital Payments Overview'"
                 }
               }
             },
@@ -357,7 +357,11 @@
                   "Value": "true"
                 }
               }
-            },
+            }
+          }
+        },
+        {
+          "properties": {
             "fillColor": {
               "solid": {
                 "color": {
@@ -383,13 +387,6 @@
         },
         {
           "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
-              }
-            },
             "fillColor": {
               "solid": {
                 "color": {
@@ -423,18 +420,22 @@
                   "Value": "true"
                 }
               }
-            },
+            }
+          }
+        },
+        {
+          "properties": {
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Digital Payments\nOverview'"
+                  "Value": "'Digital Payments'"
                 }
               }
             },
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "17D"
+                  "Value": "14D"
                 }
               }
             },
@@ -467,6 +468,27 @@
               "expr": {
                 "Literal": {
                   "Value": "64D"
+                }
+              }
+            },
+            "topMargin": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "bottomMargin": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "rightMargin": {
+              "expr": {
+                "Literal": {
+                  "Value": "4D"
                 }
               }
             }
