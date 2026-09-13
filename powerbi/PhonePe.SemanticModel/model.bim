@@ -1,6 +1,6 @@
 {
   "name": "PhonePe Merchant Expansion",
-  "compatibilityLevel": 1567,
+  "compatibilityLevel": 1606,
   "model": {
     "culture": "en-US",
     "defaultPowerBIDataSourceVersion": "powerBI_V3",
@@ -57,6 +57,30 @@
             "dataType": "string",
             "sourceColumn": "State",
             "summarizeBy": "none"
+          },
+          {
+            "type": "calculated",
+            "name": "Map Location",
+            "dataType": "string",
+            "expression": [
+              "States[State] & \", India\""
+            ],
+            "summarizeBy": "none",
+            "isHidden": true,
+            "dataCategory": "StateOrProvince"
+          },
+          {
+            "type": "calculated",
+            "name": "State Label",
+            "dataType": "string",
+            "expression": [
+              "VAR Words = SUBSTITUTE(States[State], \" \", \"|\")",
+              "RETURN CONCATENATEX(GENERATESERIES(1, PATHLENGTH(Words)),",
+              "    VAR Word = PATHITEM(Words, [Value], 0)",
+              "    RETURN UPPER(LEFT(Word, 1)) & LOWER(MID(Word, 2, LEN(Word))), \" \", [Value], ASC)"
+            ],
+            "summarizeBy": "none",
+            "isHidden": true
           }
         ],
         "partitions": [
@@ -98,6 +122,44 @@
             "dataType": "string",
             "sourceColumn": "District",
             "summarizeBy": "none"
+          },
+          {
+            "type": "calculated",
+            "name": "District Label",
+            "dataType": "string",
+            "expression": [
+              "VAR Words = SUBSTITUTE(Districts[District], \" \", \"|\")",
+              "RETURN CONCATENATEX(GENERATESERIES(1, PATHLENGTH(Words)),",
+              "    VAR Word = PATHITEM(Words, [Value], 0)",
+              "    RETURN UPPER(LEFT(Word, 1)) & LOWER(MID(Word, 2, LEN(Word))), \" \", [Value], ASC)"
+            ],
+            "summarizeBy": "none",
+            "isHidden": true
+          },
+          {
+            "type": "calculated",
+            "name": "State Label",
+            "dataType": "string",
+            "expression": [
+              "VAR Words = SUBSTITUTE(Districts[State], \" \", \"|\")",
+              "RETURN CONCATENATEX(GENERATESERIES(1, PATHLENGTH(Words)),",
+              "    VAR Word = PATHITEM(Words, [Value], 0)",
+              "    RETURN UPPER(LEFT(Word, 1)) & LOWER(MID(Word, 2, LEN(Word))), \" \", [Value], ASC)"
+            ],
+            "summarizeBy": "none",
+            "isHidden": true
+          },
+          {
+            "type": "calculated",
+            "name": "District Chart Label",
+            "dataType": "string",
+            "expression": [
+              "VAR CurrentDistrict = Districts[District]",
+              "VAR Matches = COUNTROWS(FILTER(ALL(Districts[District Key], Districts[District]), Districts[District] = CurrentDistrict))",
+              "RETURN Districts[District Label] & IF(Matches > 1, \" (\" & Districts[State Label] & \")\", \"\")"
+            ],
+            "summarizeBy": "none",
+            "isHidden": true
           }
         ],
         "partitions": [
@@ -327,6 +389,133 @@
             "expression": "VAR p = MAX(Periods[Period ID]) RETURN CALCULATE(DIVIDE(SUM('State Payments'[Retail Transactions]), 1000000000), KEEPFILTERS(Periods[Period ID] = p))",
             "formatString": "0.00\" B\"",
             "description": ""
+          },
+          {
+            "name": "Value QoQ",
+            "expression": [
+              "VAR CurrentPeriod = MAX(Periods[Period ID])",
+              "VAR CurrentValue = [Transaction Value INR]",
+              "VAR PreviousValue = CALCULATE([Transaction Value INR], REMOVEFILTERS(Periods), Periods[Period ID] = CurrentPeriod - 1)",
+              "RETURN IF(NOT ISBLANK(CurrentValue) && PreviousValue > 0, DIVIDE(CurrentValue, PreviousValue) - 1)"
+            ],
+            "displayFolder": "Report presentation",
+            "formatString": "0.0%"
+          },
+          {
+            "name": "ATV QoQ",
+            "expression": [
+              "VAR CurrentPeriod = MAX(Periods[Period ID])",
+              "VAR CurrentValue = [Average Transaction Value]",
+              "VAR PreviousValue = CALCULATE([Average Transaction Value], REMOVEFILTERS(Periods), Periods[Period ID] = CurrentPeriod - 1)",
+              "RETURN IF(NOT ISBLANK(CurrentValue) && PreviousValue > 0, DIVIDE(CurrentValue, PreviousValue) - 1)"
+            ],
+            "displayFolder": "Report presentation",
+            "formatString": "0.0%"
+          },
+          {
+            "name": "State Payment Rank",
+            "expression": [
+              "IF(NOT ISBLANK([Transaction Volume]), RANKX(ALLSELECTED(States), [Transaction Volume], , DESC, SKIP))"
+            ],
+            "displayFolder": "Report presentation",
+            "formatString": "#,0"
+          },
+          {
+            "name": "State Merchant Rank",
+            "expression": [
+              "IF(NOT ISBLANK([Registered Merchant Base]), RANKX(ALLSELECTED(States), [Registered Merchant Base], , DESC, SKIP))"
+            ],
+            "displayFolder": "Report presentation",
+            "formatString": "#,0"
+          },
+          {
+            "name": "State Median Merchants Million",
+            "expression": [
+              "MEDIANX(ALLSELECTED(States), [Merchants Million])"
+            ],
+            "displayFolder": "Report presentation",
+            "formatString": "0.00\" M\""
+          },
+          {
+            "name": "State Median Users Million",
+            "expression": [
+              "MEDIANX(ALLSELECTED(States), [Users Million])"
+            ],
+            "displayFolder": "Report presentation",
+            "formatString": "0.00\" M\""
+          },
+          {
+            "name": "Payment Insight",
+            "expression": [
+              "VAR Leader = TOPN(1, ALLSELECTED(States[State]), [Transaction Volume], DESC, States[State], ASC)",
+              "VAR LeaderName = CONCATENATEX(Leader, States[State])",
+              "VAR Share = CALCULATE([State Contribution], KEEPFILTERS(Leader))",
+              "RETURN IF(ISBLANK([Transaction Volume]), \"No payment observations for this selection.\",",
+              "    LeaderName & \" leads selected-state volume. Its share of the selected-quarter national total is \" & FORMAT(Share, \"0.0%\") & \". Validate local acceptance before prioritising acquisition spend.\")"
+            ],
+            "displayFolder": "Report presentation"
+          },
+          {
+            "name": "Payment Map Colour",
+            "expression": [
+              "VAR MaximumVolume = MAXX(ALLSELECTED(States), [Transaction Volume])",
+              "VAR RelativeVolume = DIVIDE([Transaction Volume], MaximumVolume)",
+              "RETURN IF(ISBLANK([Transaction Volume]), \"#EEEAF4\", SWITCH(TRUE(), RelativeVolume >= 0.8, \"#5F259F\", RelativeVolume >= 0.6, \"#8145BD\", RelativeVolume >= 0.4, \"#A371D4\", RelativeVolume >= 0.2, \"#C6A1EA\", \"#E8D7FB\"))"
+            ],
+            "displayFolder": "Report presentation"
+          },
+          {
+            "name": "Merchant Map Colour",
+            "expression": [
+              "VAR Density = [Merchants per 1000 Users]",
+              "RETURN IF(ISBLANK(Density), \"#EEEAF4\", SWITCH(TRUE(), Density >= 120, \"#5F259F\", Density >= 80, \"#8145BD\", Density >= 40, \"#A371D4\", Density >= 20, \"#C6A1EA\", \"#E8D7FB\"))"
+            ],
+            "displayFolder": "Report presentation"
+          },
+          {
+            "name": "Transaction QoQ Colour",
+            "expression": [
+              "VAR Change = [Transaction QoQ] RETURN IF(ISBLANK(Change), \"#716586\", IF(Change >= 0, \"#087B51\", \"#BB3656\"))"
+            ],
+            "displayFolder": "Report presentation"
+          },
+          {
+            "name": "Value QoQ Colour",
+            "expression": [
+              "VAR Change = [Value QoQ] RETURN IF(ISBLANK(Change), \"#716586\", IF(Change >= 0, \"#087B51\", \"#BB3656\"))"
+            ],
+            "displayFolder": "Report presentation"
+          },
+          {
+            "name": "User QoQ Colour",
+            "expression": [
+              "VAR Change = [User QoQ] RETURN IF(ISBLANK(Change), \"#716586\", IF(Change >= 0, \"#087B51\", \"#BB3656\"))"
+            ],
+            "displayFolder": "Report presentation"
+          },
+          {
+            "name": "Merchant QoQ Colour",
+            "expression": [
+              "VAR Change = [Merchant QoQ] RETURN IF(ISBLANK(Change), \"#716586\", IF(Change >= 0, \"#087B51\", \"#BB3656\"))"
+            ],
+            "displayFolder": "Report presentation"
+          },
+          {
+            "name": "ATV QoQ Colour",
+            "expression": [
+              "VAR Change = [ATV QoQ] RETURN IF(ISBLANK(Change), \"#716586\", IF(Change >= 0, \"#087B51\", \"#BB3656\"))"
+            ],
+            "displayFolder": "Report presentation"
+          },
+          {
+            "name": "Transaction Value Label",
+            "expression": "FORMAT([Value Trillion INR], \"₹0.00\"\"T\"\"\")",
+            "displayFolder": "Presentation"
+          },
+          {
+            "name": "Average Transaction Value Label",
+            "expression": "FORMAT([Average Transaction Value], \"₹#,0\")",
+            "displayFolder": "Presentation"
           }
         ]
       },
@@ -452,6 +641,30 @@
             "dataType": "int64",
             "sourceColumn": "No Intensity Rank",
             "summarizeBy": "none"
+          },
+          {
+            "type": "calculated",
+            "name": "Intensity Percentile",
+            "dataType": "double",
+            "expression": [
+              "VAR CurrentValue = Opportunities[Transactions per Merchant]",
+              "VAR Population = ALL(Opportunities[District Key], Opportunities[Transactions per Merchant])",
+              "RETURN DIVIDE(COUNTROWS(FILTER(Population, Opportunities[Transactions per Merchant] < CurrentValue)), COUNTROWS(Population) - 1, 0)"
+            ],
+            "summarizeBy": "none",
+            "isHidden": true
+          },
+          {
+            "type": "calculated",
+            "name": "Scale Percentile",
+            "dataType": "double",
+            "expression": [
+              "VAR CurrentValue = Opportunities[Users]",
+              "VAR Population = ALL(Opportunities[District Key], Opportunities[Users])",
+              "RETURN DIVIDE(COUNTROWS(FILTER(Population, Opportunities[Users] < CurrentValue)), COUNTROWS(Population) - 1, 0)"
+            ],
+            "summarizeBy": "none",
+            "isHidden": true
           }
         ],
         "partitions": [
@@ -495,6 +708,185 @@
             "expression": "COUNTROWS(Opportunities)",
             "formatString": "#,0",
             "description": ""
+          },
+          {
+            "name": "Eligible Merchants Million",
+            "expression": [
+              "DIVIDE(SUM(Opportunities[Merchants]), 1000000)"
+            ],
+            "displayFolder": "Report presentation",
+            "formatString": "0.00\" M\"",
+            "description": "Merchant registrations only in the eligible 2026 Q2 district scoring population."
+          },
+          {
+            "name": "State Average Opportunity Score",
+            "expression": [
+              "AVERAGE(Opportunities[Score])"
+            ],
+            "displayFolder": "Report presentation",
+            "formatString": "0.0",
+            "description": "Equal-weight mean of eligible district scores within a state; the district scoring formula is unchanged."
+          },
+          {
+            "name": "Opportunity Map Colour",
+            "expression": [
+              "VAR Score = [State Average Opportunity Score]",
+              "VAR MinimumScore = MINX(ALLSELECTED(States), [State Average Opportunity Score])",
+              "VAR MaximumScore = MAXX(ALLSELECTED(States), [State Average Opportunity Score])",
+              "VAR RelativeScore = DIVIDE(Score - MinimumScore, MaximumScore - MinimumScore, 0.5)",
+              "RETURN IF(ISBLANK(Score), \"#EEEAF4\", SWITCH(TRUE(), RelativeScore >= 0.8, \"#5F259F\", RelativeScore >= 0.6, \"#8145BD\", RelativeScore >= 0.4, \"#A371D4\", RelativeScore >= 0.2, \"#C6A1EA\", \"#E8D7FB\"))"
+            ],
+            "displayFolder": "Report presentation"
+          },
+          {
+            "name": "Opportunity Display Rank",
+            "expression": [
+              "IF(NOT ISBLANK([Opportunity Score]), RANKX(ALLSELECTED(Districts), [Opportunity Score], , DESC, SKIP))"
+            ],
+            "displayFolder": "Report presentation",
+            "formatString": "#,0"
+          },
+          {
+            "name": "Leading Opportunity District Key",
+            "expression": [
+              "VAR Candidates = FILTER(ALLSELECTED(Districts), NOT ISBLANK(CALCULATE([Opportunity Score])))",
+              "VAR Leader = TOPN(1, Candidates, CALCULATE([Opportunity Score]), DESC, Districts[District Key], ASC)",
+              "RETURN CONCATENATEX(Leader, Districts[District Key])"
+            ],
+            "displayFolder": "Report presentation"
+          },
+          {
+            "name": "Leading Opportunity District",
+            "expression": [
+              "VAR Candidates = FILTER(ALLSELECTED(Districts), NOT ISBLANK(CALCULATE([Opportunity Score])))",
+              "VAR Leader = TOPN(1, Candidates, CALCULATE([Opportunity Score]), DESC, Districts[District Key], ASC)",
+              "RETURN IF(COUNTROWS(Leader) = 0, \"No eligible district\", CONCATENATEX(Leader, Districts[District Label] & \" | \" & Districts[State Label]))"
+            ],
+            "displayFolder": "Report presentation"
+          },
+          {
+            "name": "Leading District Name",
+            "expression": [
+              "VAR Candidates = FILTER(ALLSELECTED(Districts), NOT ISBLANK(CALCULATE([Opportunity Score])))",
+              "VAR Leader = TOPN(1, Candidates, CALCULATE([Opportunity Score]), DESC, Districts[District Key], ASC)",
+              "RETURN IF(COUNTROWS(Leader) = 0, \"No eligible district\", CONCATENATEX(Leader, Districts[District Label]))"
+            ],
+            "displayFolder": "Report presentation"
+          },
+          {
+            "name": "Leading State Name",
+            "expression": [
+              "VAR Candidates = FILTER(ALLSELECTED(Districts), NOT ISBLANK(CALCULATE([Opportunity Score])))",
+              "VAR Leader = TOPN(1, Candidates, CALCULATE([Opportunity Score]), DESC, Districts[District Key], ASC)",
+              "RETURN CONCATENATEX(Leader, Districts[State Label])"
+            ],
+            "displayFolder": "Report presentation"
+          },
+          {
+            "name": "Leading National Rank Badge",
+            "expression": [
+              "VAR DistrictKey = [Leading Opportunity District Key]",
+              "VAR NationalRank = LOOKUPVALUE(Opportunities[National Rank], Opportunities[District Key], DistrictKey)",
+              "RETURN IF(ISBLANK(NationalRank), \"No candidate\", \"#\" & FORMAT(NationalRank, \"0\") & \" National rank\")"
+            ],
+            "displayFolder": "Report presentation"
+          },
+          {
+            "name": "Leading Opportunity Score",
+            "expression": [
+              "VAR DistrictKey = [Leading Opportunity District Key]",
+              "RETURN IF(NOT ISBLANK(DistrictKey), CALCULATE([Opportunity Score], REMOVEFILTERS(Districts), TREATAS({DistrictKey}, Districts[District Key])))"
+            ],
+            "displayFolder": "Report presentation",
+            "formatString": "0.0"
+          },
+          {
+            "name": "Leading Opportunity YoY",
+            "expression": [
+              "VAR DistrictKey = [Leading Opportunity District Key]",
+              "RETURN IF(NOT ISBLANK(DistrictKey), CALCULATE([Opportunity YoY], REMOVEFILTERS(Districts), TREATAS({DistrictKey}, Districts[District Key])))"
+            ],
+            "displayFolder": "Report presentation",
+            "formatString": "0.0%"
+          },
+          {
+            "name": "Leading Users per Merchant",
+            "expression": [
+              "VAR DistrictKey = [Leading Opportunity District Key]",
+              "RETURN IF(NOT ISBLANK(DistrictKey), CALCULATE([Opportunity Users per Merchant], REMOVEFILTERS(Districts), TREATAS({DistrictKey}, Districts[District Key])))"
+            ],
+            "displayFolder": "Report presentation",
+            "formatString": "0.0"
+          },
+          {
+            "name": "Leading Opportunity Action",
+            "expression": [
+              "VAR DistrictKey = [Leading Opportunity District Key]",
+              "VAR ActionText = LOOKUPVALUE(Recommendations[Action], Recommendations[District Key], DistrictKey)",
+              "RETURN IF(ISBLANK(DistrictKey), \"No eligible district in this selection\", COALESCE(ActionText, \"Assess field readiness; outside the current recommendation shortlist\"))"
+            ],
+            "displayFolder": "Report presentation"
+          },
+          {
+            "name": "Opportunity Insight",
+            "expression": [
+              "VAR DistrictName = [Leading Opportunity District]",
+              "VAR Score = [Leading Opportunity Score]",
+              "RETURN IF(ISBLANK(Score), \"No eligible opportunity in this geography. Broaden the state or district selection.\",",
+              "    DistrictName & \" leads this geography at \" & FORMAT(Score, \"0.0\") & \"/100. Prioritise field validation; ranking is sensitive to transaction-intensity weighting.\")"
+            ],
+            "displayFolder": "Report presentation"
+          },
+          {
+            "name": "Leading District Factor Percentile",
+            "expression": [
+              "VAR DistrictKey = [Leading Opportunity District Key]",
+              "RETURN IF(NOT ISBLANK(DistrictKey), 100 * CALCULATE(SWITCH(SELECTEDVALUE('Score Factors'[Factor]),",
+              "    \"Growth\", AVERAGE(Opportunities[Growth Percentile]),",
+              "    \"Intensity\", AVERAGE(Opportunities[Intensity Percentile]),",
+              "    \"Gap\", AVERAGE(Opportunities[Low Penetration Percentile]),",
+              "    \"Scale\", AVERAGE(Opportunities[Scale Percentile])), REMOVEFILTERS(Districts), TREATAS({DistrictKey}, Districts[District Key])))"
+            ],
+            "displayFolder": "Report presentation",
+            "formatString": "0.0"
+          },
+          {
+            "name": "India Factor Percentile",
+            "expression": [
+              "100 * CALCULATE(SWITCH(SELECTEDVALUE('Score Factors'[Factor]),",
+              "    \"Growth\", AVERAGE(Opportunities[Growth Percentile]),",
+              "    \"Intensity\", AVERAGE(Opportunities[Intensity Percentile]),",
+              "    \"Gap\", AVERAGE(Opportunities[Low Penetration Percentile]),",
+              "    \"Scale\", AVERAGE(Opportunities[Scale Percentile])), REMOVEFILTERS(Districts), REMOVEFILTERS(States))"
+            ],
+            "displayFolder": "Report presentation",
+            "formatString": "0.0"
+          },
+          {
+            "name": "Opportunity Radar SVG",
+            "expression": [
+              "VAR LG = CALCULATE([Leading District Factor Percentile], 'Score Factors'[Factor] = \"Growth\") / 100",
+              "VAR LI = CALCULATE([Leading District Factor Percentile], 'Score Factors'[Factor] = \"Intensity\") / 100",
+              "VAR LP = CALCULATE([Leading District Factor Percentile], 'Score Factors'[Factor] = \"Gap\") / 100",
+              "VAR LS = CALCULATE([Leading District Factor Percentile], 'Score Factors'[Factor] = \"Scale\") / 100",
+              "VAR LPoints = \"200,\" & FORMAT(90 - 60 * LG, \"0.0\", \"en-US\") & \" \" &",
+              "    FORMAT(200 + 60 * LI, \"0.0\", \"en-US\") & \",90 200,\" & FORMAT(90 + 60 * LP, \"0.0\", \"en-US\") & \" \" &",
+              "    FORMAT(200 - 60 * LS, \"0.0\", \"en-US\") & \",90\"",
+              "VAR NG = CALCULATE([India Factor Percentile], 'Score Factors'[Factor] = \"Growth\") / 100",
+              "VAR NI = CALCULATE([India Factor Percentile], 'Score Factors'[Factor] = \"Intensity\") / 100",
+              "VAR NP = CALCULATE([India Factor Percentile], 'Score Factors'[Factor] = \"Gap\") / 100",
+              "VAR NS = CALCULATE([India Factor Percentile], 'Score Factors'[Factor] = \"Scale\") / 100",
+              "VAR NPoints = \"200,\" & FORMAT(90 - 60 * NG, \"0.0\", \"en-US\") & \" \" &",
+              "    FORMAT(200 + 60 * NI, \"0.0\", \"en-US\") & \",90 200,\" & FORMAT(90 + 60 * NP, \"0.0\", \"en-US\") & \" \" &",
+              "    FORMAT(200 - 60 * NS, \"0.0\", \"en-US\") & \",90\"",
+              "RETURN IF(ISBLANK([Leading Opportunity Score]), BLANK(),",
+              "    \"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='430' height='190' viewBox='0 0 430 190'><g font-family='Segoe UI' font-size='12' fill='%235F259F'><path d='M200 30L260 90L200 150L140 90Z M200 60L230 90L200 120L170 90Z' fill='none' stroke='%23DFD5EF'/><path d='M200 30V150M140 90H260' stroke='%23DFD5EF'/><text x='200' y='18' text-anchor='middle'>Growth</text><text x='272' y='94'>Intensity</text><text x='200' y='168' text-anchor='middle'>Gap</text><text x='128' y='94' text-anchor='end'>Scale</text><text x='206' y='35' font-size='9' fill='%23716586'>100</text><text x='206' y='64' font-size='9' fill='%23716586'>50</text>\" &",
+              "    \"<polygon points='\" & NPoints & \"' fill='%23EDE5FA' fill-opacity='0.35' stroke='%23B38AE8' stroke-width='2' stroke-dasharray='4 3'/>\" &",
+              "    \"<polygon points='\" & LPoints & \"' fill='%235F259F' fill-opacity='0.12' stroke='%235F259F' stroke-width='2.5'/>\" &",
+              "    \"<circle cx='116' cy='184' r='3' fill='%235F259F'/><text x='123' y='187' font-size='10'>Leading district</text><path d='M244 184H259' stroke='%23B38AE8' stroke-width='2' stroke-dasharray='4 3'/><text x='264' y='187' font-size='10'>India average</text></g></svg>\")"
+            ],
+            "displayFolder": "Report presentation",
+            "dataCategory": "ImageUrl"
           }
         ]
       },
@@ -580,6 +972,65 @@
             "expression": "MAX(Recommendations[YoY Growth])",
             "formatString": "0.0%",
             "description": ""
+          }
+        ]
+      },
+      {
+        "name": "Score Factors",
+        "description": "Presentation of the canonical 30/25/25/20 score weights; no change to scoring.",
+        "columns": [
+          {
+            "type": "calculatedTableColumn",
+            "name": "Factor",
+            "dataType": "string",
+            "sourceColumn": "[Factor]",
+            "summarizeBy": "none",
+            "sortByColumn": "Order"
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Weight",
+            "dataType": "double",
+            "sourceColumn": "[Weight]",
+            "summarizeBy": "none",
+            "formatString": "0%",
+            "isHidden": true
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Order",
+            "dataType": "int64",
+            "sourceColumn": "[Order]",
+            "summarizeBy": "none",
+            "isHidden": true
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Score Factors",
+            "mode": "import",
+            "source": {
+              "type": "calculated",
+              "expression": "DATATABLE(\"Factor\", STRING, \"Weight\", DOUBLE, \"Order\", INTEGER, {{\"Growth\", 0.30, 1}, {\"Intensity\", 0.25, 2}, {\"Gap\", 0.25, 3}, {\"Scale\", 0.20, 4}})"
+            }
+          }
+        ],
+        "measures": [
+          {
+            "name": "Factor Weight",
+            "expression": [
+              "MAX('Score Factors'[Weight])"
+            ],
+            "displayFolder": "Report presentation",
+            "formatString": "0%"
+          },
+          {
+            "name": "Remaining Weight",
+            "expression": [
+              "1 - [Factor Weight]"
+            ],
+            "displayFolder": "Report presentation",
+            "formatString": "0%"
           }
         ]
       }

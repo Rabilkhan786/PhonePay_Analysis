@@ -1,10 +1,10 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.0.0/schema.json",
   "name": "13f9d588d3e31dc325ea",
-  "displayName": "02  Merchant Penetration Analysis",
+  "displayName": "Merchant Penetration Analysis",
   "displayOption": "FitToPage",
-  "height": 900,
-  "width": 1440,
+  "height": 1080,
+  "width": 1920,
   "objects": {
     "background": [
       {
@@ -14,7 +14,7 @@
               "color": {
                 "expr": {
                   "Literal": {
-                    "Value": "'#F5F3F8'"
+                    "Value": "'#EFE7F9'"
                   }
                 }
               }
@@ -28,6 +28,84 @@
             }
           }
         }
+      }
+    ]
+  },
+  "visualInteractions": [
+    {
+      "source": "ea53b81c38b298ac54f1",
+      "target": "9052640d06c12c783ae1",
+      "type": "NoFilter"
+    },
+    {
+      "source": "ea53b81c38b298ac54f1",
+      "target": "4b528d780a8b1c7ccafd",
+      "type": "NoFilter"
+    },
+    {
+      "source": "ea53b81c38b298ac54f1",
+      "target": "13e75e3198bc60dd81bd",
+      "type": "NoFilter"
+    },
+    {
+      "source": "ea53b81c38b298ac54f1",
+      "target": "b255d305ad75e828f606",
+      "type": "NoFilter"
+    },
+    {
+      "source": "ea53b81c38b298ac54f1",
+      "target": "9cef46b5eb46bbd3909e",
+      "type": "NoFilter"
+    },
+    {
+      "source": "ea53b81c38b298ac54f1",
+      "target": "a9d538e20de2b9fe13b0",
+      "type": "NoFilter"
+    },
+    {
+      "source": "ea53b81c38b298ac54f1",
+      "target": "c6d16794c435f1230e92",
+      "type": "NoFilter"
+    }
+  ],
+  "type": "Drillthrough",
+  "pageBinding": {
+    "name": "MerchantCoverageByState",
+    "type": "Drillthrough",
+    "acceptsFilterContext": "Default",
+    "parameters": [
+      {
+        "name": "StateCoverageParameter",
+        "boundFilter": "MerchantCoverageStateFilter",
+        "fieldExpr": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "States"
+              }
+            },
+            "Property": "Map Location"
+          }
+        }
+      }
+    ]
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "MerchantCoverageStateFilter",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "States"
+              }
+            },
+            "Property": "Map Location"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "Drillthrough"
       }
     ]
   }

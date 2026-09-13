@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "f021fac595e1825f9fc2",
   "position": {
-    "x": 24,
-    "y": 865,
-    "width": 1390,
-    "height": 24,
-    "z": 16000,
-    "tabOrder": 16000
+    "x": 264,
+    "y": 986,
+    "width": 1624,
+    "height": 78,
+    "z": 42000,
+    "tabOrder": 42000
   },
   "visual": {
     "visualType": "textbox",
@@ -32,7 +32,32 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "13D"
+                  "Value": "17D"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#21104B'"
+                    }
+                  }
+                }
+              }
+            },
+            "fontFamily": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Segoe UI Semibold'"
+                }
+              }
+            },
+            "titleWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
                 }
               }
             }
@@ -76,7 +101,32 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#E6DFF0'"
+                    }
+                  }
+                }
+              }
+            },
+            "radius": {
+              "expr": {
+                "Literal": {
+                  "Value": "12D"
+                }
+              }
+            },
+            "width": {
+              "expr": {
+                "Literal": {
+                  "Value": "1D"
                 }
               }
             }
@@ -89,28 +139,153 @@
             "top": {
               "expr": {
                 "Literal": {
-                  "Value": "10D"
+                  "Value": "8D"
                 }
               }
             },
             "bottom": {
               "expr": {
                 "Literal": {
-                  "Value": "10D"
+                  "Value": "2D"
                 }
               }
             },
             "left": {
               "expr": {
                 "Literal": {
-                  "Value": "12D"
+                  "Value": "80D"
                 }
               }
             },
             "right": {
               "expr": {
                 "Literal": {
+                  "Value": "16D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "dropShadow": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#29144C'"
+                    }
+                  }
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "94D"
+                }
+              }
+            },
+            "preset": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Custom'"
+                }
+              }
+            },
+            "shadowBlur": {
+              "expr": {
+                "Literal": {
+                  "Value": "8D"
+                }
+              }
+            },
+            "shadowDistance": {
+              "expr": {
+                "Literal": {
+                  "Value": "2D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "visualTooltip": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "type": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Default'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
                   "Value": "12D"
+                }
+              }
+            },
+            "titleFontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#21104B'"
+                    }
+                  }
+                }
+              }
+            },
+            "valueFontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#5F259F'"
+                    }
+                  }
+                }
+              }
+            },
+            "background": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FFFFFF'"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'merchant insight'"
                 }
               }
             }
@@ -126,11 +301,23 @@
               {
                 "textRuns": [
                   {
-                    "value": "Source: PhonePe Pulse | Restated release through 2026 Q2 | PhonePe ecosystem only; registrations are cumulative.",
+                    "value": "Key insight  |  Relative registration density guides investigation",
                     "textStyle": {
                       "fontFamily": "Segoe UI",
-                      "fontSize": "11px",
-                      "color": "#657082"
+                      "fontSize": "16px",
+                      "color": "#5F259F"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "High users per merchant can flag a coverage gap. Use the median quadrants to compare scale, then confirm active acceptance: registrations are cumulative, not active shops.",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI",
+                      "fontSize": "15px",
+                      "color": "#21104B"
                     }
                   }
                 ]

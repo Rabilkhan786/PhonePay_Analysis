@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "d285ea7f7eb9c6360734",
   "position": {
-    "x": 24,
-    "y": 190,
-    "width": 338,
-    "height": 126,
-    "z": 7000,
-    "tabOrder": 7000
+    "x": 594,
+    "y": 116,
+    "width": 316,
+    "height": 112,
+    "z": 20000,
+    "tabOrder": 20000
   },
   "visual": {
     "visualType": "cardVisual",
@@ -18,14 +18,14 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "true"
                 }
               }
             },
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "''"
+                  "Value": "'Transactions'"
                 }
               }
             },
@@ -33,6 +33,31 @@
               "expr": {
                 "Literal": {
                   "Value": "13D"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#5F259F'"
+                    }
+                  }
+                }
+              }
+            },
+            "fontFamily": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Segoe UI Semibold'"
+                }
+              }
+            },
+            "titleWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
                 }
               }
             }
@@ -76,7 +101,32 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#E6DFF0'"
+                    }
+                  }
+                }
+              }
+            },
+            "radius": {
+              "expr": {
+                "Literal": {
+                  "Value": "12D"
+                }
+              }
+            },
+            "width": {
+              "expr": {
+                "Literal": {
+                  "Value": "1D"
                 }
               }
             }
@@ -89,21 +139,21 @@
             "top": {
               "expr": {
                 "Literal": {
-                  "Value": "10D"
+                  "Value": "8D"
                 }
               }
             },
             "bottom": {
               "expr": {
                 "Literal": {
-                  "Value": "10D"
+                  "Value": "31D"
                 }
               }
             },
             "left": {
               "expr": {
                 "Literal": {
-                  "Value": "12D"
+                  "Value": "94D"
                 }
               }
             },
@@ -116,29 +166,132 @@
             }
           }
         }
-      ]
-    },
-    "query": {
-      "queryState": {
-        "Data": {
-          "projections": [
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "Payments"
-                    }
-                  },
-                  "Property": "Volume Billion"
+      ],
+      "dropShadow": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
                 }
-              },
-              "queryRef": "Payments.Volume Billion",
-              "nativeQueryRef": "Volume Billion"
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#29144C'"
+                    }
+                  }
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "94D"
+                }
+              }
+            },
+            "preset": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Custom'"
+                }
+              }
+            },
+            "shadowBlur": {
+              "expr": {
+                "Literal": {
+                  "Value": "8D"
+                }
+              }
+            },
+            "shadowDistance": {
+              "expr": {
+                "Literal": {
+                  "Value": "2D"
+                }
+              }
             }
-          ]
+          }
         }
-      }
+      ],
+      "visualTooltip": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "type": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Default'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "12D"
+                }
+              }
+            },
+            "titleFontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#21104B'"
+                    }
+                  }
+                }
+              }
+            },
+            "valueFontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#5F259F'"
+                    }
+                  }
+                }
+              }
+            },
+            "background": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FFFFFF'"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Transactions'"
+                }
+              }
+            }
+          }
+        }
+      ]
     },
     "objects": {
       "value": [
@@ -148,6 +301,45 @@
               "expr": {
                 "Literal": {
                   "Value": "28D"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#21104B'"
+                    }
+                  }
+                }
+              }
+            },
+            "fontFamily": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Segoe UI Semibold'"
+                }
+              }
+            },
+            "labelDisplayUnits": {
+              "expr": {
+                "Literal": {
+                  "Value": "1D"
+                }
+              }
+            },
+            "textWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "showBlankAs": {
+              "expr": {
+                "Literal": {
+                  "Value": "'—'"
                 }
               }
             }
@@ -160,10 +352,10 @@
       "label": [
         {
           "properties": {
-            "fontSize": {
+            "show": {
               "expr": {
                 "Literal": {
-                  "Value": "12D"
+                  "Value": "false"
                 }
               }
             }
@@ -189,13 +381,69 @@
           }
         }
       ],
-      "padding": [
+      "layout": [
         {
           "properties": {
+            "backgroundShow": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
             "paddingUniform": {
               "expr": {
                 "Literal": {
-                  "Value": "4D"
+                  "Value": "0D"
+                }
+              }
+            },
+            "rectangleRoundedCurve": {
+              "expr": {
+                "Literal": {
+                  "Value": "12D"
+                }
+              }
+            },
+            "style": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Cards'"
+                }
+              }
+            },
+            "topOuterMargin": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "bottomOuterMargin": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "leftOuterMargin": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "rightOuterMargin": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "calloutSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "100D"
                 }
               }
             }
@@ -205,13 +453,13 @@
           }
         }
       ],
-      "layout": [
+      "accentBar": [
         {
           "properties": {
-            "paddingUniform": {
+            "show": {
               "expr": {
                 "Literal": {
-                  "Value": "4D"
+                  "Value": "false"
                 }
               }
             }
@@ -220,7 +468,50 @@
             "id": "default"
           }
         }
+      ],
+      "cardCalloutArea": [
+        {
+          "properties": {
+            "paddingUniform": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "backgroundTransparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "100D"
+                }
+              }
+            }
+          }
+        }
       ]
+    },
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Payments"
+                    }
+                  },
+                  "Property": "Volume Billion"
+                }
+              },
+              "queryRef": "Payments.Volume Billion",
+              "nativeQueryRef": "Volume Billion",
+              "displayName": "Volume Billion"
+            }
+          ]
+        }
+      }
     }
   }
 }

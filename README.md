@@ -26,7 +26,7 @@ The recommendation is to begin field validation with the six candidates that rem
 4. [`04_opportunity_analysis.ipynb`](notebooks/04_opportunity_analysis.ipynb) — eligibility, segments, score distributions, factor profiles, recent persistence, weight sensitivity, threshold sensitivity, and the final research queue.
 5. [`06_business_questions.md`](sql/06_business_questions.md) — 15 numbered portfolio questions, each followed by clean MySQL, an explanation, and a decision-focused insight.
 6. [`business_recommendations.md`](reports/business_recommendations.md) — recommendation, evidence, field-pilot measures, and decision limits.
-7. [`PhonePe.pbip`](powerbi/PhonePe.pbip) or [`PhonePe_Merchant_Expansion_2026.pbix`](powerbi/PhonePe_Merchant_Expansion_2026.pbix) — the canonical Power BI project and portable single-file report.
+7. [`PhonePe.pbip`](powerbi/PhonePe.pbip) — the Power BI project with three distinct 1920×1080 report pages. The existing PBIX is the previous saved report; regenerate it from the PBIP after reviewing the redesigned pages in Power BI Desktop.
 
 ## Analytical design
 
@@ -90,7 +90,13 @@ uv run ruff check .
 uv run pytest
 ```
 
-For Power BI, open the PBIP project, edit the `DataFolder` parameter to the absolute `powerbi/data` path on your machine, then refresh. The repository stores screenshots only in `powerbi/charts`.
+For Power BI, open [`powerbi/PhonePe_Merchant_Expansion_2026.pbix`](powerbi/PhonePe_Merchant_Expansion_2026.pbix) to view the populated report. To edit the source, open [`powerbi/PhonePe.pbip`](powerbi/PhonePe.pbip), set `DataFolder` to the absolute `powerbi/data` path on your machine, then refresh.
+
+The three 1920 × 1080 pages use distinct layouts with native Shape Maps, synchronized quarter/state/district slicers, and real-model DAX. The India boundaries match all 36 source state/union-territory names and need no Azure Maps tenant permission. The large maps include editable state-name annotations; the smaller merchant-density map identifies states through tooltips. Selecting a state filters the district shortlist, leading district and opportunity profile. The shortlist shows the top 5 eligible districts in the selected geography. Opportunity scores and segments remain the fixed 2026 Q2 snapshot; payment KPIs use the latest selected quarter, while trend charts retain their recent history. Opportunity shading uses the average eligible district score within each state. Grey areas have no eligible score; they are not assigned a zero.
+
+All three pages were rendered and reviewed in Power BI Desktop. Native page previews are stored only in `powerbi/charts`: [Digital Payments Overview](powerbi/charts/01_digital_payments_overview.png), [Merchant Penetration Analysis](powerbi/charts/02_merchant_penetration_analysis.png), and [Merchant Expansion Opportunities](powerbi/charts/03_merchant_expansion_opportunities.png). Check dense scatter labels, small-territory callouts, tooltip readability and drill-through at your display scaling before presenting. In Desktop edit mode, use Ctrl + click to activate navigation buttons.
+
+India boundaries: Survey of India data, [curated by ramSeraph](https://github.com/ramSeraph/indian_admin_boundaries/releases/tag/states), distributed by that curator under CC0 1.0. The bundled `powerbi/PhonePe.Report/StaticResources/RegisteredResources/IndiaStates.topojson` records the source asset hash and processing: state-name alignment, ring orientation for Shape Map and topology-preserving simplification. Four small source-defined interstate disputed areas remain unassigned and unscored. No boundaries or opportunity values are invented.
 
 ## Data source and limits
 

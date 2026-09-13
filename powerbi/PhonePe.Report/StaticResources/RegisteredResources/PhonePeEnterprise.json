@@ -1,0 +1,38 @@
+{
+  "name": "PhonePe Enterprise",
+  "dataColors": [
+    "#5F259F",
+    "#8B5BCB",
+    "#B38AE8",
+    "#CFB7F1",
+    "#317A9B",
+    "#D39A42",
+    "#A84F83",
+    "#7C9D65"
+  ],
+  "background": "#F7F5FB",
+  "foreground": "#21104B",
+  "tableAccent": "#5F259F",
+  "textClasses": {
+    "title": {
+      "fontFace": "Segoe UI Semibold",
+      "fontSize": 17,
+      "color": "#21104B"
+    },
+    "label": {
+      "fontFace": "Segoe UI",
+      "fontSize": 11,
+      "color": "#716586"
+    },
+    "callout": {
+      "fontFace": "Segoe UI Semibold",
+      "fontSize": 32,
+      "color": "#21104B"
+    },
+    "header": {
+      "fontFace": "Segoe UI Semibold",
+      "fontSize": 13,
+      "color": "#21104B"
+    }
+  }
+}

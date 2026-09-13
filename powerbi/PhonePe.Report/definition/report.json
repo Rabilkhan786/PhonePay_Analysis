@@ -6,11 +6,124 @@
       "name": "CY24SU02",
       "reportVersionAtImport": "5.55",
       "type": "SharedResources"
+    },
+    "customTheme": {
+      "name": "PhonePeEnterprise",
+      "reportVersionAtImport": "5.55",
+      "type": "RegisteredResources"
     }
   },
   "settings": {
     "useStylableVisualContainerHeader": true,
     "exportDataMode": "AllowSummarized",
     "defaultDrillFilterOtherVisuals": true
-  }
+  },
+  "resourcePackages": [
+    {
+      "name": "RegisteredResources",
+      "type": "RegisteredResources",
+      "items": [
+        {
+          "name": "PhonePeEnterprise",
+          "path": "PhonePeEnterprise.json",
+          "type": "CustomTheme"
+        },
+        {
+          "name": "PhonePeSidebar20260912.svg",
+          "path": "PhonePeSidebar20260912.svg",
+          "type": "Image"
+        },
+        {
+          "name": "IndiaDigitalTogether20260912.svg",
+          "path": "IndiaDigitalTogether20260912.svg",
+          "type": "Image"
+        },
+        {
+          "name": "PhonePeNav0Idle20260912.svg",
+          "path": "PhonePeNav0Idle20260912.svg",
+          "type": "Image"
+        },
+        {
+          "name": "PhonePeNav0Active20260912.svg",
+          "path": "PhonePeNav0Active20260912.svg",
+          "type": "Image"
+        },
+        {
+          "name": "PhonePeNav1Idle20260912.svg",
+          "path": "PhonePeNav1Idle20260912.svg",
+          "type": "Image"
+        },
+        {
+          "name": "PhonePeNav1Active20260912.svg",
+          "path": "PhonePeNav1Active20260912.svg",
+          "type": "Image"
+        },
+        {
+          "name": "PhonePeNav2Idle20260912.svg",
+          "path": "PhonePeNav2Idle20260912.svg",
+          "type": "Image"
+        },
+        {
+          "name": "PhonePeNav2Active20260912.svg",
+          "path": "PhonePeNav2Active20260912.svg",
+          "type": "Image"
+        },
+        {
+          "name": "PhonePeIconValue20260912.svg",
+          "path": "PhonePeIconValue20260912.svg",
+          "type": "Image"
+        },
+        {
+          "name": "PhonePeIconTransactions20260912.svg",
+          "path": "PhonePeIconTransactions20260912.svg",
+          "type": "Image"
+        },
+        {
+          "name": "PhonePeIconUsers20260912.svg",
+          "path": "PhonePeIconUsers20260912.svg",
+          "type": "Image"
+        },
+        {
+          "name": "PhonePeIconMerchant20260912.svg",
+          "path": "PhonePeIconMerchant20260912.svg",
+          "type": "Image"
+        },
+        {
+          "name": "PhonePeIconAtv20260912.svg",
+          "path": "PhonePeIconAtv20260912.svg",
+          "type": "Image"
+        },
+        {
+          "name": "PhonePeIconScore20260912.svg",
+          "path": "PhonePeIconScore20260912.svg",
+          "type": "Image"
+        },
+        {
+          "name": "PhonePeIconDensity20260912.svg",
+          "path": "PhonePeIconDensity20260912.svg",
+          "type": "Image"
+        },
+        {
+          "name": "PhonePeIconBulb20260912.svg",
+          "path": "PhonePeIconBulb20260912.svg",
+          "type": "Image"
+        },
+        {
+          "name": "IndiaStates.topojson",
+          "path": "IndiaStates.topojson",
+          "type": "ShapeMap"
+        },
+        {
+          "name": "PhonePeFinanceBackground.svg",
+          "path": "PhonePeFinanceBackground.svg",
+          "type": "Image"
+        },
+        {
+          "name": "PhonePeMerchantDecor.svg",
+          "path": "PhonePeMerchantDecor.svg",
+          "type": "Image"
+        }
+      ]
+    }
+  ]
 }
